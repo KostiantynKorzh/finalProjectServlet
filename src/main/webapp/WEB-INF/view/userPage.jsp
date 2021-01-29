@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="mes"/>
+<fmt:setBundle basename="me.project.controller.servlet.Mes"/>
 
 
 <html>

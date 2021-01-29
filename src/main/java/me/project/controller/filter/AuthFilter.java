@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/*")
 public class AuthFilter implements Filter {
 
     @Override
@@ -22,12 +21,14 @@ public class AuthFilter implements Filter {
 
         String loginURL = req.getContextPath() + "/auth/login";
         String signupURL = req.getContextPath() + "/auth/signup";
+        String langUrl = req.getContextPath() + "/lang";
 
         HttpSession session = req.getSession();
 
         boolean loggedIn = session.getAttribute("user") != null;
 
-        boolean canGuest = req.getRequestURI().contains(loginURL) || req.getRequestURI().contains(signupURL);
+        boolean canGuest = req.getRequestURI().contains(loginURL)
+                || req.getRequestURI().contains(signupURL)||req.getRequestURI().contains(langUrl);
 
         if (!loggedIn && !canGuest) {
             res.sendRedirect(loginURL);

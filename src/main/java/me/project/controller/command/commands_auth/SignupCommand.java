@@ -1,5 +1,7 @@
-package me.project.controller.command;
+package me.project.controller.command.commands_auth;
 
+import me.project.controller.command.Command;
+import me.project.controller.command.util.Validation;
 import me.project.model.entity.Role;
 import me.project.model.entity.User;
 import me.project.model.service.UserService;
@@ -14,9 +16,7 @@ public class SignupCommand implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        System.out.println("is valid: "+isValidForm(firstName, lastName, email, password));
-
-        if (!isValidForm(firstName, lastName, email, password)) {
+        if (!Validation.isValidForm(firstName, lastName, email, password)) {
             return "/WEB-INF/view/signup.jsp";
         } else {
             UserService userService = new UserService();
@@ -27,22 +27,9 @@ public class SignupCommand implements Command {
                     .password(password)
                     .role(Role.USER)
                     .build();
-            userService.addUser(user);
-            return "redirect:/WEB-INF/view/login.jsp";
+//            userService.addUser(user, request);
+            return "redirect:/auth/login";
         }
-    }
-
-    private boolean isValidInput(String input) {
-        return input != null && !input.trim().isEmpty();
-    }
-
-    private boolean isValidForm(String firstName, String lastName, String login, String password) {
-        System.out.println(isValidInput(firstName));
-        System.out.println(isValidInput(lastName));
-        System.out.println(isValidInput(login));
-        System.out.println(isValidInput(password));
-        return isValidInput(firstName) && isValidInput(lastName) &&
-                isValidInput(login) && isValidInput(password);
     }
 
 }

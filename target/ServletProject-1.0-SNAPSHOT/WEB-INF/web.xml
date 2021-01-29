@@ -15,4 +15,27 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>LangFilter</filter-name>
+        <filter-class>me.project.controller.filter.LangFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LangFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>me.project.controller.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>src/main/java/resources/mes</param-value>
+    </context-param>
+
 </web-app>

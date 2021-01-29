@@ -1,18 +1,42 @@
 package me.project.controller.servlet;
 
+import me.project.controller.command.Command;
+import me.project.controller.command.commands_admin.GetTestsCommand;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/admin/*")
 public class AdminServlet extends HttpServlet {
 
+    Map<String, Command> commands = new HashMap<>();
+
+    @Override
+    public void init() throws ServletException {
+        commands.put("allTests", new GetTestsCommand());
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/view/adminPage.jsp").forward(req, resp);
+        processRequest(req, resp);
+    }
+
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path = req.getRequestURI().replaceAll(".*/admin/", "");
+        Command command = commands.getOrDefault(path,
+                (r) -> "/WEB-INF/view/adminPage.jsp");
+        String page = command.execute(req);
+        if (page.contains("redirect:")) {
+            resp.sendRedirect(page.replace("redirect:", ""));
+        } else {
+            req.getRequestDispatcher(page).forward(req, resp);
+        }
     }
 
 }

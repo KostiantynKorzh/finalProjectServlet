@@ -15,6 +15,9 @@ public class EncodingFilter implements Filter {
         servletResponse.setContentType("text/html");
         servletResponse.setCharacterEncoding("UTF-8");
         servletRequest.setCharacterEncoding("UTF-8");
+
+        System.out.println("ENCODING FILTER ____--------_________-------");
+
         filterChain.doFilter(servletRequest,servletResponse);
     }
 

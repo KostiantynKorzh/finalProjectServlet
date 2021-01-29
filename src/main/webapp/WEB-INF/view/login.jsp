@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="me.intro.Mes"/>
+<fmt:setBundle basename="me.project.controller.servlet.Mes"/>
 
 <html lang="ua">
 <head>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<form method="post" action="/login">
+<form method="post" action="/auth/login">
     <label><fmt:message key="login.login"/></label>
     <input type="text" name="login"/>
     <br>

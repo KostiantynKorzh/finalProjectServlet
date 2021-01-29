@@ -1,8 +1,10 @@
 package me.project.controller.servlet;
 
 import me.project.controller.command.Command;
-import me.project.controller.command.LoginCommand;
-import me.project.controller.command.SignupCommand;
+import me.project.controller.command.commands_auth.LoginCommand;
+import me.project.controller.command.commands_auth.LogoutCommand;
+import me.project.controller.command.commands_auth.SignupCommand;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +24,7 @@ public class AuthServlet extends HttpServlet {
     public void init() throws ServletException {
         commands.put("login", new LoginCommand());
         commands.put("signup", new SignupCommand());
+        commands.put("logout", new LogoutCommand());
     }
 
     @Override
@@ -37,11 +40,11 @@ public class AuthServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getRequestURI().replaceAll(".*/auth/", "");
         Command command = commands.getOrDefault(path,
-                (r) -> "/index.jsp");
+                (r) -> "/WEB-INF/view/login.jsp");
         String page = command.execute(req);
-        if(page.contains("redirect:")){
-            resp.sendRedirect(page.replace("redirect:", "/auth"));
-        }else {
+        if (page.contains("redirect:")) {
+            resp.sendRedirect(page.replace("redirect:", ""));
+        } else {
             req.getRequestDispatcher(page).forward(req, resp);
         }
     }
