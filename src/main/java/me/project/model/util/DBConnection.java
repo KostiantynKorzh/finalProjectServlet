@@ -13,7 +13,7 @@ public class DBConnection {
 
     private static DataSource dataSource;
 
-    public static DataSource initConnection() throws ClassNotFoundException, SQLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static DataSource initConnection(){
 
         String dbDriver = "com.mysql.cj.jdbc.Driver";
         String dbURL = "jdbc:mysql://localhost:3306/";
@@ -39,11 +39,7 @@ public class DBConnection {
         }
 
         return dataSource;
-//
-//        Class.forName(dbDriver);
-//
-//        return DriverManager.getConnection(dbURL + dbName,
-//               dbUsername, dbPassword);
+
     }
 
 }

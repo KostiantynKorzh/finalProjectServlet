@@ -1,7 +1,6 @@
 package me.project.model.dao.factory;
 
-import me.project.model.dao.TestDao;
-import me.project.model.dao.UserDao;
+import me.project.model.dao.*;
 import me.project.model.util.DBConnection;
 
 import javax.sql.DataSource;
@@ -11,10 +10,7 @@ import java.sql.SQLException;
 
 public class JDBCDaoFactory extends DaoFactory {
 
-    private DataSource dataSource = DBConnection.initConnection();
-
-    public JDBCDaoFactory() throws NoSuchMethodException, IllegalAccessException, InstantiationException, SQLException, InvocationTargetException, ClassNotFoundException {
-    }
+    private final DataSource dataSource = DBConnection.initConnection();
 
     @Override
     public UserDao createUserFactory() {
@@ -23,10 +19,25 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public TestDao createTestFactory() {
-        return new JDBCTestDao();
+        return new JDBCTestDao(getConnection());
     }
 
-    private Connection getConnection(){
+    @Override
+    public RoleDao createRoleFactory() {
+        return new JDBCRoleDao(getConnection());
+    }
+
+    @Override
+    public ResultDao createResultFactory() {
+        return new JDBCResultDao(getConnection());
+    }
+
+    @Override
+    public RequiredTestDao createRequiredTestFactory() {
+        return new JDBCRequiredTestDao(getConnection());
+    }
+
+    private Connection getConnection() {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {

@@ -8,7 +8,6 @@ public class Validation {
 
     public static boolean isValidForm(String... inputs) {
         for (String input : inputs) {
-            System.out.println(input + " : " + isValidInput(input));
             if (!isValidInput(input)) {
                 return false;
             }

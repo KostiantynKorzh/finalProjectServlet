@@ -6,12 +6,12 @@
 
 
     <servlet>
-        <servlet-name>Servlet</servlet-name>
-        <servlet-class>me.project.controller.servlet.HomeServlet</servlet-class>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>me.project.controller.servlet.IndexServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Servlet</servlet-name>
+        <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
@@ -37,5 +37,12 @@
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>src/main/java/resources/mes</param-value>
     </context-param>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
 </web-app>

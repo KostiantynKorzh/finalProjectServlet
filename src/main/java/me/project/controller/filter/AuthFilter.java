@@ -23,14 +23,27 @@ public class AuthFilter implements Filter {
         String signupURL = req.getContextPath() + "/auth/signup";
         String langUrl = req.getContextPath() + "/lang";
 
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setDateHeader("Expires", 0);
+
+
         HttpSession session = req.getSession();
 
         boolean loggedIn = session.getAttribute("user") != null;
 
         boolean canGuest = req.getRequestURI().contains(loginURL)
-                || req.getRequestURI().contains(signupURL)||req.getRequestURI().contains(langUrl);
+                || req.getRequestURI().contains(signupURL);
 
-        if (!loggedIn && !canGuest) {
+        boolean lang = req.getRequestURI().contains(langUrl);
+
+        if (!loggedIn && !canGuest && !lang) {
+            res.sendRedirect(loginURL);
+            return;
+        }
+
+        if (loggedIn && canGuest) {
+            session.setAttribute("user", null);
             res.sendRedirect(loginURL);
             return;
         }

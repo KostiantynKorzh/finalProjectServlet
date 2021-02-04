@@ -1,5 +1,9 @@
 package me.project.model.dao;
 
-public interface UserDao<T> extends Dao {
-    T findByLoginAndPassword(String login,String password);
+import me.project.model.entity.User;
+
+public interface UserDao extends Dao<User> {
+    User findByLoginAndPassword(String login, String password);
+
+    void deleteById(Long id);
 }

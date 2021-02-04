@@ -1,5 +1,6 @@
 package me.project.controller.servlet;
 
+import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.controller.command.commands_auth.LoginCommand;
 import me.project.controller.command.commands_auth.LogoutCommand;
@@ -40,7 +41,7 @@ public class AuthServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getRequestURI().replaceAll(".*/auth/", "");
         Command command = commands.getOrDefault(path,
-                (r) -> "/WEB-INF/view/login.jsp");
+                (r) -> View.LOGIN_PAGE);
         String page = command.execute(req);
         if (page.contains("redirect:")) {
             resp.sendRedirect(page.replace("redirect:", ""));

@@ -1,70 +1,55 @@
 package me.project.model.service;
 
-import me.project.model.dto.UserDTO;
-import me.project.model.entity.Role;
+import me.project.model.dao.RoleDao;
+import me.project.model.dao.UserDao;
+import me.project.model.dao.factory.DaoFactory;
 import me.project.model.entity.User;
-import me.project.model.util.DBConnection;
+import me.project.model.entity.enums.Role;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.List;
 
 public class UserService {
 
-    UserDTO userDTO;
-    Connection con;
+    DaoFactory daoFactory = DaoFactory.getInstance();
 
-//    public boolean addUser(User user, HttpServletRequest req) {
-//
-//        HttpSession session = req.getSession();
-//
-//        try {
-//            con = DBConnection.initConnection();
-//            Statement statement = con.createStatement();
-//
-//
-//            String findUserByLoginQuery = "SELECT * FROM users" +
-//                    " WHERE email='" + user.getLogin() + "';";
-//
-//
-//            ResultSet resultSet = statement.executeQuery(findUserByLoginQuery);
-//
-//
-////            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//
-//            while (resultSet.next()) {
-//                String passwordFromDB = resultSet.getString("password");
-//                if (user.getPassword().equals(passwordFromDB)) {
-//                    int userId = resultSet.getInt("id");
-//                    String findRoleByUserId = "SELECT role_id FROM user_roles WHERE user_id='" + userId + "';";
-//                    ResultSet resultSetRole = statement.executeQuery(findRoleByUserId);
-//                    resultSetRole.next();
-//                    int roleInt = resultSetRole.getInt(1);
-//                    Role role = Role.USER;
-//                    if (roleInt == 3) {
-//                        role = Role.ADMIN;
-//                    }
-//
-//                    userDTO = new UserDTO.Builder()
-//                            .login(user.getLogin())
-//                            .password(user.getPassword())
-//                            .role(role)
-//                            .build();
-//
-//                    session.setAttribute("user", userDTO);
-//
-//                    resultSet.close();
-//                    return true;
-//                }
-//            }
-//            resultSet.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return false;
-//    }
+    public void deleteUser(Long id){
+        try(UserDao userDao = daoFactory.createUserFactory()){
+            userDao.deleteById(id);
+        }
+    }
+
+    public void deleteUser(User user){
+        try(UserDao userDao = daoFactory.createUserFactory()){
+            userDao.delete(user);
+        }
+    }
+
+    public void updateUser(User user) {
+        try (UserDao userDao = daoFactory.createUserFactory()) {
+            userDao.update(user);
+        }
+    }
+
+    public User getUserById(Long id) {
+        try (UserDao userDao = daoFactory.createUserFactory()) {
+            return userDao.findById(id);
+        }
+    }
+
+//    public List<User> getUsersBy
+
+    public List<User> getUsers() {
+        try (UserDao userDao = daoFactory.createUserFactory()) {
+            List<User> users = userDao.findAll();
+            Role role;
+            try (RoleDao roleDao = daoFactory.createRoleFactory()) {
+                for (User user : users) {
+                    role = roleDao.findByUser(user);
+                    user.setRole(role);
+                }
+            }
+            return users;
+        }
+    }
 
 }

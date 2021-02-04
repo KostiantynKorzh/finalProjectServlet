@@ -1,10 +1,11 @@
 package me.project.model.dto;
 
-import me.project.model.entity.Role;
+import me.project.model.entity.enums.Role;
 import me.project.model.entity.User;
 
 public class UserDTO {
 
+    private Long id;
     private String login;
     private String password;
     private Role role;
@@ -13,15 +14,31 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
+        id = user.getId();
         login = user.getLogin();
         password = user.getPassword();
         role = user.getRole();
+    }
+
+    public UserDTO(Long id, String login, String password, Role role) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.role = role;
     }
 
     public UserDTO(String login, String password, Role role) {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -56,6 +73,11 @@ public class UserDTO {
             userDTO = new UserDTO();
         }
 
+        public Builder id(Long id) {
+            userDTO.setId(id);
+            return this;
+        }
+
         public Builder login(String login) {
             userDTO.setLogin(login);
             return this;
@@ -77,4 +99,12 @@ public class UserDTO {
 
     }
 
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }

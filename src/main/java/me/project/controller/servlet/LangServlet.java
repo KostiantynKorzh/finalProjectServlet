@@ -8,22 +8,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/lang")
+@WebServlet("/lang/*")
 public class LangServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        String sessionLang = (String) session.getAttribute("lang");
+        String lang = req.getRequestURI().replaceAll(".*lang/", "");
 
-        if (sessionLang.equals("ua")) {
-            session.setAttribute("lang", "en");
-        } else {
+        if (lang.equals("ua")) {
             session.setAttribute("lang", "ua");
+        } else if (lang.equals("en")) {
+            session.setAttribute("lang", "en");
         }
-
-        System.out.println("Lang servlet: " + sessionLang);
 
         String url = req.getHeader("Referer");
         resp.sendRedirect(req.getContextPath() + url);

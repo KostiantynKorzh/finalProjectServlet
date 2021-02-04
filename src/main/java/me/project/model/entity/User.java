@@ -1,8 +1,10 @@
 package me.project.model.entity;
 
+import me.project.model.entity.enums.Role;
+
 public class User {
 
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String login;
@@ -12,7 +14,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String firstName, String lastName, String login, String password, Role role) {
+    public User(Long id, String firstName, String lastName, String login, String password, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,11 +23,11 @@ public class User {
         this.role = role;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,10 +73,15 @@ public class User {
 
     public static class Builder {
 
-        private User user;
+        private final User user;
 
         public Builder() {
             user = new User();
+        }
+
+        public Builder id(Long id) {
+            user.setId(id);
+            return this;
         }
 
         public Builder firstName(String firstName) {
@@ -108,4 +115,15 @@ public class User {
 
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }
