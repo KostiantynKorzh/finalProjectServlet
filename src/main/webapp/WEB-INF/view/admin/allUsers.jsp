@@ -18,10 +18,26 @@
     <table class="table" id="table">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col"><fmt:message key="admin.allUsers.firstName"/></th>
-            <th scope="col"><fmt:message key="admin.allUsers.lastName"/></th>
-            <th scope="col"><fmt:message key="admin.allUsers.email"/></th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=id">
+                    id
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=first_name">
+                    <fmt:message key="admin.allUsers.firstName"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=last_name">
+                    <fmt:message key="admin.allUsers.lastName"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=email">
+                    <fmt:message key="admin.allUsers.email"/>
+                </a>
+            </th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>

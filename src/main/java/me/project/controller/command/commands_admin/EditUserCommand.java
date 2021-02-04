@@ -19,6 +19,6 @@ public class EditUserCommand implements Command {
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         userService.updateUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin/users/?sorted=";
     }
 }

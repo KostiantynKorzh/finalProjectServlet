@@ -19,12 +19,13 @@ public class AdminServlet extends HttpServlet {
 
     Map<String, Command> commands = new HashMap<>();
     String path;
+    UserService userService = new UserService();
 
     @Override
     public void init() {
         commands.put("home", new HomeCommand());
         commands.put("tests", new GetTestsCommand());
-        commands.put("users", new GetUsersCommand());
+        commands.put("users/", new GetUsersCommand(userService));
         commands.put("users/edit", new EditUserCommand());
     }
 
@@ -48,8 +49,9 @@ public class AdminServlet extends HttpServlet {
             commands.put(path, new AddTestsToUserCommand());
         }
 
+
         Command command = commands.getOrDefault(path,
-                (r) -> View.ADMIN_PAGE);
+                (r) -> View.HOME_PAGE_ADMIN);
         String page = command.execute(req);
         if (page.contains("redirect:")) {
             resp.sendRedirect(page.replace("redirect:", ""));

@@ -43,7 +43,6 @@ public class AddTestsToUserCommand implements Command {
             request.setAttribute("passedTests", passedTests);
             userService = new UserService();
             User user = userService.getUserById(userId);
-            System.out.println("Here: " + user);
             request.setAttribute("userToAdd",
                     user.getFirstName() + " " + user.getLastName());
             request.setAttribute("userId", userId);

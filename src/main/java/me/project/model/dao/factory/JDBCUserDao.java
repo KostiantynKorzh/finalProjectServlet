@@ -18,12 +18,21 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void create(User entity) {
-        String query = "INSERT INTO users (first_name, last_name, email, password) values (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+        String queryUser = "INSERT INTO users (first_name, last_name, email, password, created) values (?, ?, ?, ?, NOW());";
+        String queryRole = "INSERT INTO user_roles (user_id, role_id) values ((select MAX(id) FROM users), ?);";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryUser)) {
             preparedStatement.setString(1, entity.getFirstName());
             preparedStatement.setString(2, entity.getLastName());
             preparedStatement.setString(3, entity.getLogin());
             preparedStatement.setString(4, entity.getPassword());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryRole)) {
+            preparedStatement.setInt(1, entity.getRole().ordinal() + 1);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,11 +64,17 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        List<User> users = new ArrayList<>();
-
-        String query = "SELECT * FROM users;";
-        try (Statement statement = connection.createStatement()) {
+    public List<User> findAllSortedBy(String parameter) {
+        List<User> sortedUsers = new ArrayList<>();
+        String query = "SELECT * " +
+                "FROM users " +
+                "LEFT JOIN user_roles " +
+                "ON users.id=user_roles.user_id " +
+                "LEFT JOIN roles " +
+                "ON user_roles.role_id=roles.id " +
+                "WHERE roles.id=1 " +
+                "ORDER BY users." + parameter;
+        try (Statement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery(query);
             User user;
             while (resultSet.next()) {
@@ -69,7 +84,49 @@ public class JDBCUserDao implements UserDao {
                         .lastName(resultSet.getString("last_name"))
                         .login(resultSet.getString("email"))
                         .password(resultSet.getString("password"))
-                        .role(Role.USER)
+                        .role(Role.valueOf(resultSet.getString("name").replace("ROLE_", "")))
+                        .build();
+
+                sortedUsers.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sortedUsers;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+
+        String query = "SELECT * " +
+                "FROM users " +
+                "LEFT JOIN user_roles " +
+                "ON users.id=user_roles.user_id " +
+                "LEFT JOIN roles " +
+                "ON user_roles.role_id=roles.id " +
+                "WHERE roles.id=1";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            User user;
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+//            for (int i = 1; i <= columnsNumber; i++) {
+//                System.out.print(rsmd.getColumnLabel(i) + ", ");
+//            }
+//            System.out.println();
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    System.out.print(resultSet.getString(i) + ", ");
+                }
+                System.out.println();
+                user = new User.Builder()
+                        .id(resultSet.getLong("id"))
+                        .firstName(resultSet.getString("first_name"))
+                        .lastName(resultSet.getString("last_name"))
+                        .login(resultSet.getString("email"))
+                        .password(resultSet.getString("password"))
+                        .role(Role.valueOf(resultSet.getString("name").replace("ROLE_", "")))
                         .build();
 
                 users.add(user);
@@ -109,10 +166,17 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void delete(User entity) {
-        String query = "DELETE FROM users WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        String queryResult = "ALTER TABLE `testing_app_db`.`results` DROP FOREIGN KEY (`user_id`);" +
+                "ALTER TABLE results ADD CONSTRAINT user_id_foreign FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;";
+        String queryUser = "DELETE FROM users WHERE id = ?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryResult)) {
+//            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queryUser)) {
             preparedStatement.setLong(1, entity.getId());
-
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

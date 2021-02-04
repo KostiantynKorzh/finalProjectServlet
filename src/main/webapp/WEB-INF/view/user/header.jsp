@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="me.project.controller.servlet.Mes"/>
+<fmt:setBundle basename="mes"/>
 
 <html>
 <head>
@@ -21,7 +21,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <c:if test="${sessionScope.user!=null}">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/user/home">Home</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/user/home"><fmt:message
+                    key="common.header.home"/></a>
         </c:if>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,17 +32,22 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/profile">Profile</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/user/profile"><fmt:message
+                                key="common.header.profile"/></a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/user/requiredTests">Required Tests</a>
+                        <a class="nav-link text-nowrap"
+                           href="${pageContext.request.contextPath}/user/requiredTests"><fmt:message
+                                key="user.header.requiredTests"/></a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/user/passedTests">Passed Tests</a>
+                        <a class="nav-link text-nowrap"
+                           href="${pageContext.request.contextPath}/user/passedTests"><fmt:message
+                                key="user.header.passedTests"/></a>
                     </c:if>
                 </li>
             </ul>
@@ -51,21 +57,23 @@
                     <li class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Lang
+                            <fmt:message key="common.header.lang"/>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <ul>
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/lang/en">English</a></li>
-                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/lang/ua">Українська</a>
-                                </li>
-                            </ul>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/lang/en">English</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/lang/ua">Українська</a>
                         </div>
                     </li>
 
                     <li class="nav-item">
                         <c:if test="${sessionScope.user!=null}">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/auth/logout">Logout</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/auth/logout"><fmt:message
+                                    key="common.header.logout"/></a>
+                        </c:if>
+                        <c:if test="${sessionScope.user==null}">
+                            <a class="nav-link" style="width: 65px"
+                               href="${pageContext.request.contextPath}/auth/logout"></a>
                         </c:if>
                     </li>
                 </ul>

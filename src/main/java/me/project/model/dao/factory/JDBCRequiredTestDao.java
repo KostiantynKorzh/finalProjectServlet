@@ -34,6 +34,11 @@ public class JDBCRequiredTestDao implements RequiredTestDao {
     }
 
     @Override
+    public List<RequiredTest> findAllSortedBy(String parameter) {
+        return null;
+    }
+
+    @Override
     public List<RequiredTest> findAll() {
         return null;
     }

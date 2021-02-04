@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TestService {
 
@@ -81,8 +82,27 @@ public class TestService {
         return testDao.findAllRequiredTestsByUserId(userId);
     }
 
+    public Integer getRequiredTestsCount(Long userId) {
+        return testDao.findAllRequiredTestsByUserId(userId).size();
+    }
+
     public List<ResultDTO> getResults(Long userId) {
         return resultDao.findAllResultsByUserId(userId);
+    }
+
+    public Double getAverageGradeOfPassedTests(Long userId) {
+        AtomicReference<Double> average = new AtomicReference<>(0.0);
+        List<ResultDTO> results = resultDao.findAllResultsByUserId(userId);
+        results.forEach(result -> average.updateAndGet(v -> v + result.getScore()));
+        System.out.println(average.get() + " : " + results.size());
+        if (results.size() == 0) {
+            return 0.0;
+        }
+        return average.get() / results.size();
+    }
+
+    public Integer getPassedTestsCount(Long userId) {
+        return resultDao.findAllResultsByUserId(userId).size();
     }
 
     public static TestService getInstance() {

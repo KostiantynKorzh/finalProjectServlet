@@ -51,6 +51,11 @@ public class JDBCRoleDao implements RoleDao {
     }
 
     @Override
+    public List<Role> findAllSortedBy(String parameter) {
+        return null;
+    }
+
+    @Override
     public List findAll() {
         return null;
     }

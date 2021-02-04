@@ -2,10 +2,7 @@ package me.project.controller.servlet;
 
 import me.project.controller.View;
 import me.project.controller.command.Command;
-import me.project.controller.command.commands_user.HomeCommand;
-import me.project.controller.command.commands_user.PassTestCommand;
-import me.project.controller.command.commands_user.PassedTestsCommand;
-import me.project.controller.command.commands_user.RequiredTestsCommand;
+import me.project.controller.command.commands_user.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +23,7 @@ public class UserServlet extends HttpServlet {
         commands.put("home", new HomeCommand());
         commands.put("requiredTests", new RequiredTestsCommand());
         commands.put("passedTests", new PassedTestsCommand());
+        commands.put("profile", new ProfileCommand());
     }
 
     @Override

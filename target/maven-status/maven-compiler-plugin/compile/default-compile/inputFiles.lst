@@ -1,10 +1,10 @@
-/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_profile/ProfileCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/HomeCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/AuthFilter.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/AuthServlet.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/GetTestsCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/RequiredTestDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/entity/enums/Difficulty.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/ProfileCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/listener/ContextListener.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCRoleDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/AdminFilter.java
@@ -12,7 +12,6 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/View.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/DeleteUserCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_auth/SignupCommand.java
-/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/ProfileServlet.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/TestService.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/UserDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCUserDao.java
@@ -49,5 +48,6 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/UserDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/LangFilter.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/Command.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/UserInfoDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/LangServlet.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/UserService.java

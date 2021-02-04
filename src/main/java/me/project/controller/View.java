@@ -5,7 +5,8 @@ public class View {
     public static final String SIGNUP_PAGE = "/WEB-INF/view/guest/signup.jsp";
     public static final String LOGIN_PAGE = "/WEB-INF/view/guest/login.jsp";
 
-    public static final String PROFILE_PAGE = "/WEB-INF/view/common/profile.jsp";
+    public static final String USER_PROFILE_PAGE = "/WEB-INF/view/user/profile.jsp";
+    public static final String ADMIN_PROFILE_PAGE = "/WEB-INF/view/admin/profile.jsp";
 
     public static final String USER_PAGE = "/WEB-INF/view/user/userPage.jsp";
     public static final String REQUIRED_TESTS_PAGE = "/WEB-INF/view/user/requiredTests.jsp";
@@ -15,7 +16,6 @@ public class View {
 
     public static final String INDEX_PAGE = "/WEB-INF/view/common/index.jsp";
 
-    public static final String ADMIN_PAGE = "/WEB-INF/view/admin/adminPage.jsp";
     public static final String ALL_USERS_PAGE = "/WEB-INF/view/admin/allUsers.jsp";
     public static final String ALL_TESTS_PAGE = "/WEB-INF/view/admin/allTests.jsp";
     public static final String ADD_TESTS_TO_USER_PAGE = "/WEB-INF/view/admin/addTestsToUser.jsp";

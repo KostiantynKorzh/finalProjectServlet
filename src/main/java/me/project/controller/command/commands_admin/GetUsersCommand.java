@@ -12,10 +12,20 @@ public class GetUsersCommand implements Command {
 
     UserService userService;
 
+    public GetUsersCommand(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest request) {
-        userService = new UserService();
-        List<User> users = userService.getUsers();
+        String parameter = request.getParameter("sorted");
+        List<User> users;
+        if (parameter.equals("")) {
+            users = userService.getUsers();
+        } else {
+            System.out.println("PARAMETER = " + parameter);
+            users = userService.getUsersSortedBy(parameter);
+        }
         request.setAttribute("users", users);
         return View.ALL_USERS_PAGE;
     }

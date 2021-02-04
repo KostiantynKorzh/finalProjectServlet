@@ -12,7 +12,8 @@ me/project/controller/command/commands_user/PassTestCommand.class
 me/project/controller/command/commands_auth/LogoutCommand.class
 me/project/controller/servlet/IndexServlet.class
 me/project/controller/filter/EncodingFilter.class
-me/project/controller/servlet/ProfileServlet.class
+me/project/controller/command/commands_user/ProfileCommand.class
+me/project/model/dto/UserInfoDTO.class
 me/project/controller/servlet/AuthServlet.class
 me/project/controller/command/commands_admin/GetUsersCommand.class
 me/project/model/dao/RequiredTestDao.class
@@ -24,7 +25,6 @@ me/project/controller/command/util/Validation.class
 me/project/model/dto/ResultDTO.class
 me/project/model/dto/UserDTO.class
 me/project/controller/servlet/AdminServlet.class
-me/project/controller/command/commands_profile/ProfileCommand.class
 me/project/model/service/UserService.class
 me/project/model/dao/factory/JDBCRequiredTestDao.class
 me/project/model/service/AuthService.class

@@ -91,6 +91,10 @@ public class JDBCTestDao implements TestDao {
     }
 
     @Override
+    public List<Test> findAllSortedBy(String parameter) {
+        return null;
+    }
+    @Override
     public List<Test> findAllRequiredTestsByUserId(Long id) {
         List<Test> requiredTests = new ArrayList<>();
 

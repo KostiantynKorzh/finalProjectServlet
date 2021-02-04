@@ -19,6 +19,11 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
+    public List<ResultDTO> findAllSortedBy(String parameter) {
+        return null;
+    }
+
+    @Override
     public List<ResultDTO> findAllResultsByUserId(Long id) {
 //        String query = "SELECT test_id FROM results WHERE user_id= ?";
         String query = "SELECT tests.id, tests.title, tests.subject, " +
