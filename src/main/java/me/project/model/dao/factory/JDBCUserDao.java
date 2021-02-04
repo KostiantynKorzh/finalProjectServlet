@@ -64,6 +64,40 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
+    public List<User> findAllSortedByWithPagination(String parameter, int page, int perPage) {
+        List<User> sortedAndPaginatedUsers = new ArrayList<>();
+        String query = "SELECT * " +
+                "FROM users " +
+                "LEFT JOIN user_roles " +
+                "ON users.id=user_roles.user_id " +
+                "LEFT JOIN roles " +
+                "ON user_roles.role_id=roles.id " +
+                "WHERE roles.id=1 " +
+                "ORDER BY users." + parameter + " " +
+                "LIMIT " + perPage + " " +
+                "OFFSET " + page * perPage;
+        try (Statement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery(query);
+            User user;
+            while (resultSet.next()) {
+                user = new User.Builder()
+                        .id(resultSet.getLong("id"))
+                        .firstName(resultSet.getString("first_name"))
+                        .lastName(resultSet.getString("last_name"))
+                        .login(resultSet.getString("email"))
+                        .password(resultSet.getString("password"))
+                        .role(Role.valueOf(resultSet.getString("name").replace("ROLE_", "")))
+                        .build();
+
+                sortedAndPaginatedUsers.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sortedAndPaginatedUsers;
+    }
+
+    @Override
     public List<User> findAllSortedBy(String parameter) {
         List<User> sortedUsers = new ArrayList<>();
         String query = "SELECT * " +
@@ -163,6 +197,7 @@ public class JDBCUserDao implements UserDao {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void delete(User entity) {

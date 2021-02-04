@@ -13,7 +13,6 @@ public class DeleteUserCommand implements Command {
     public String execute(HttpServletRequest request) {
         Long id = Long.valueOf(request.getRequestURI().replaceAll(".*/delete/", ""));
         try {
-            System.out.println("DELETE ID");
             userService = new UserService();
             userService.deleteUser(id);
         } catch (Exception e) {

@@ -18,14 +18,22 @@ public class GetUsersCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String parameter = request.getParameter("sorted");
-        List<User> users;
-        if (parameter.equals("")) {
-            users = userService.getUsers();
-        } else {
-            System.out.println("PARAMETER = " + parameter);
-            users = userService.getUsersSortedBy(parameter);
+        String parameter = "id";
+        int page = 1;
+        int pages = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
         }
+        if (request.getParameter("sorted") != null) {
+            parameter = request.getParameter("sorted");
+        }
+        request.setAttribute("page", page);
+        request.setAttribute("parameter", parameter);
+        List<User> users;
+        pages = (int) Math.ceil(userService.getUsers().size() * 1.0 / 2);
+        request.setAttribute("pages", pages);
+        System.out.println(parameter + " : " + (page - 1));
+        users = userService.getUsersSortedByAndPaginated(parameter, page - 1, 2);
         request.setAttribute("users", users);
         return View.ALL_USERS_PAGE;
     }

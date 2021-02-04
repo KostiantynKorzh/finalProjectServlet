@@ -32,7 +32,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page"
-                       href="${pageContext.request.contextPath}/admin/users/?sorted="><fmt:message key="admin.header.users"/></a>
+                       href="${pageContext.request.contextPath}/admin/users/?sorted=id&page=1"><fmt:message key="admin.header.users"/></a>
                 </li>
             </ul>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

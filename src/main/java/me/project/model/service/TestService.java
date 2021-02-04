@@ -70,12 +70,14 @@ public class TestService {
         allTests.removeAll(passedTests);
 
         return allTests;
-
     }
 
     public List<Test> getTests() {
-        List<Test> tests = testDao.findAll();
-        return tests;
+        return testDao.findAll();
+    }
+
+    public void deleteTestById(Long id) {
+        testDao.deleteById(id);
     }
 
     public List<Test> getRequiredTests(Long userId) {
@@ -93,11 +95,10 @@ public class TestService {
     public Double getAverageGradeOfPassedTests(Long userId) {
         AtomicReference<Double> average = new AtomicReference<>(0.0);
         List<ResultDTO> results = resultDao.findAllResultsByUserId(userId);
-        results.forEach(result -> average.updateAndGet(v -> v + result.getScore()));
-        System.out.println(average.get() + " : " + results.size());
         if (results.size() == 0) {
             return 0.0;
         }
+        results.forEach(result -> average.updateAndGet(v -> v + result.getScore()));
         return average.get() / results.size();
     }
 

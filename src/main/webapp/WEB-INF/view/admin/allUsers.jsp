@@ -19,22 +19,22 @@
         <thead>
         <tr>
             <th scope="col">
-                <a href="${pageContext.request.contextPath}/admin/users/?sorted=id">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=id&page=${requestScope.page}">
                     id
                 </a>
             </th>
             <th scope="col">
-                <a href="${pageContext.request.contextPath}/admin/users/?sorted=first_name">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=first_name&page=${requestScope.page}">
                     <fmt:message key="admin.allUsers.firstName"/>
                 </a>
             </th>
             <th scope="col">
-                <a href="${pageContext.request.contextPath}/admin/users/?sorted=last_name">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=last_name&page=${requestScope.page}">
                     <fmt:message key="admin.allUsers.lastName"/>
                 </a>
             </th>
             <th scope="col">
-                <a href="${pageContext.request.contextPath}/admin/users/?sorted=email">
+                <a href="${pageContext.request.contextPath}/admin/users/?sorted=email&page=${requestScope.page}">
                     <fmt:message key="admin.allUsers.email"/>
                 </a>
             </th>
@@ -66,6 +66,24 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page-1}">Previous</a>
+            </li>
+            <c:forEach begin="1" end="${requestScope.pages}" varStatus="loop">
+                <li class="page-item">
+                    <a class="page-link"
+                       href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                </li>
+            </c:forEach>
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page+1}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

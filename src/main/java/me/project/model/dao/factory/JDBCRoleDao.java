@@ -25,6 +25,11 @@ public class JDBCRoleDao implements RoleDao {
     }
 
     @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
     public Role findById(Long id) {
         return null;
     }

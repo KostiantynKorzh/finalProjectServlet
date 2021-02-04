@@ -36,6 +36,12 @@ public class UserService {
         }
     }
 
+    public List<User> getUsersSortedByAndPaginated(String parameter, int page, int perPage) {
+        try (UserDao userDao = daoFactory.createUserFactory()) {
+            return userDao.findAllSortedByWithPagination(parameter, page, perPage);
+        }
+    }
+
     public List<User> getUsersSortedBy(String parameter) {
         try (UserDao userDao = daoFactory.createUserFactory()) {
             return userDao.findAllSortedBy(parameter);

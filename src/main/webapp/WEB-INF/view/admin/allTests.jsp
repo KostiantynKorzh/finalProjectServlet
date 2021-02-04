@@ -22,7 +22,8 @@
             <th scope="col"><fmt:message key="admin.allTests.subject"/></th>
             <th scope="col"><fmt:message key="admin.allTests.difficulty"/></th>
             <th scope="col"><fmt:message key="admin.allTests.duration"/></th>
-            <th scope="col"><fmt:message key="admin.allTests.created"/></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +34,14 @@
                 <th><c:out value="${test.subject}"/></th>
                 <th><c:out value="${test.difficulty}"/></th>
                 <th><c:out value="${test.duration}"/></th>
-                <th><c:out value="${test.created}"/></th>
+                <th><a class="btn btn-primary"
+                       href="${pageContext.request.contextPath}/admin/tests/edit/${test.id}">
+                    <fmt:message key="admin.allUsers.edit"/></a>
+                <th>
+                <a class="btn btn-danger"
+                   href="${pageContext.request.contextPath}/admin/tests/delete/${test.id}">
+                    <fmt:message key="admin.allUsers.delete"/></a>
+                </th>
             </tr>
         </c:forEach>
         </tbody>

@@ -15,6 +15,10 @@ public class JDBCRequiredTestDao implements RequiredTestDao {
         this.connection = connection;
     }
 
+    @Override
+    public void deleteById(Long id) {
+
+    }
 
     @Override
     public void create(RequiredTest entity) {

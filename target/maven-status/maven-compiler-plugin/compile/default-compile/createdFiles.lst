@@ -18,12 +18,14 @@ me/project/controller/servlet/AuthServlet.class
 me/project/controller/command/commands_admin/GetUsersCommand.class
 me/project/model/dao/RequiredTestDao.class
 me/project/controller/listener/ContextListener.class
+me/project/controller/command/commands_admin/DeleteTestCommand.class
 me/project/controller/command/commands_admin/HomeCommand.class
 me/project/model/entity/enums/Subject.class
 me/project/model/dao/ResultDao.class
 me/project/controller/command/util/Validation.class
 me/project/model/dto/ResultDTO.class
 me/project/model/dto/UserDTO.class
+me/project/controller/command/commands_admin/EditTestCommand.class
 me/project/controller/servlet/AdminServlet.class
 me/project/model/service/UserService.class
 me/project/model/dao/factory/JDBCRequiredTestDao.class

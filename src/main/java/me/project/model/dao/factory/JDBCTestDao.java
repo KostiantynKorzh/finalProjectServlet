@@ -82,6 +82,17 @@ public class JDBCTestDao implements TestDao {
     }
 
     @Override
+    public void deleteById(Long id) {
+        String query = "DELETE FROM tests WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void update(Test entity) {
 
     }

@@ -11,4 +11,5 @@ public interface Dao<T> extends AutoCloseable {
     void update(T entity);
     void delete(T entity);
     void close();
+    void deleteById(Long id);
 }

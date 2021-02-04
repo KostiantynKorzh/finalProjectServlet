@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade" id="list-home" role="tabpanel"
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel"
                              aria-labelledby="overall-list">
                             <h1 style="font-size: 80px"><c:out value="${requestScope.overall}"/></h1>
                         </div>

@@ -48,7 +48,12 @@ public class AdminServlet extends HttpServlet {
         if (path.matches("users/addTests/[0-9]+.*")) {
             commands.put(path, new AddTestsToUserCommand());
         }
-
+        if (path.matches("tests/delete/[0-9]+")) {
+            commands.put(path, new DeleteTestCommand());
+        }
+        if (path.matches("tests/edit/[0-9]+")) {
+            commands.put(path, new EditTestCommand());
+        }
 
         Command command = commands.getOrDefault(path,
                 (r) -> View.HOME_PAGE_ADMIN);
