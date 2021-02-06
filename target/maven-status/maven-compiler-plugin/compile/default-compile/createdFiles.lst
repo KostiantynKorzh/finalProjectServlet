@@ -1,14 +1,23 @@
 me/project/controller/command/commands_user/HomeCommand.class
+me/project/model/entity/Answer$Builder.class
 me/project/model/dto/ResultDTO$Builder.class
+me/project/model/dao/QuestionDao.class
+me/project/controller/command/commands_admin/ProfileCommand.class
 me/project/model/dao/factory/JDBCRoleDao.class
+me/project/model/dao/factory/JDBCAnswerDao.class
+me/project/model/dao/AnswerDao.class
 me/project/model/entity/Test.class
 me/project/model/entity/User.class
 me/project/model/dao/factory/JDBCDaoFactory.class
 me/project/controller/command/commands_user/PassedTestsCommand.class
+me/project/model/entity/Question$Builder.class
 me/project/model/entity/RequiredTest.class
+me/project/model/dto/CompleteTestDTO.class
+me/project/controller/command/commands_user/TakeTestCommand$1.class
 me/project/controller/command/commands_user/RequiredTestsCommand.class
 me/project/controller/View.class
 me/project/controller/command/commands_user/PassTestCommand.class
+me/project/model/entity/Question.class
 me/project/controller/command/commands_auth/LogoutCommand.class
 me/project/controller/servlet/IndexServlet.class
 me/project/controller/filter/EncodingFilter.class
@@ -20,6 +29,7 @@ me/project/model/dao/RequiredTestDao.class
 me/project/controller/listener/ContextListener.class
 me/project/controller/command/commands_admin/DeleteTestCommand.class
 me/project/controller/command/commands_admin/HomeCommand.class
+me/project/model/dto/TestDTO.class
 me/project/model/entity/enums/Subject.class
 me/project/model/dao/ResultDao.class
 me/project/controller/command/util/Validation.class
@@ -35,6 +45,7 @@ me/project/controller/servlet/LangServlet.class
 me/project/model/entity/User$Builder.class
 me/project/model/dao/Dao.class
 me/project/model/dao/UserDao.class
+me/project/model/dao/factory/JDBCQuestionDao.class
 me/project/model/dao/factory/JDBCTestDao.class
 me/project/controller/filter/AuthFilter.class
 me/project/controller/filter/LangFilter.class
@@ -42,6 +53,7 @@ me/project/controller/command/commands_admin/EditUserCommand.class
 me/project/controller/command/commands_admin/GetTestsCommand.class
 me/project/controller/command/commands_auth/LoginCommand.class
 me/project/model/dto/UserDTO$Builder.class
+me/project/model/entity/Answer.class
 me/project/model/entity/enums/Difficulty.class
 me/project/model/dao/factory/DaoFactory.class
 me/project/model/util/DBConnection.class
@@ -55,5 +67,7 @@ me/project/controller/command/commands_admin/AddTestsToUserCommand.class
 me/project/model/entity/enums/Role.class
 me/project/model/dao/factory/JDBCUserDao.class
 me/project/controller/command/commands_auth/SignupCommand.class
+me/project/controller/command/commands_user/TakeTestCommand.class
 me/project/controller/command/commands_admin/DeleteUserCommand.class
+me/project/model/dto/CompleteTestDTO$Answer.class
 me/project/model/dao/TestDao.class

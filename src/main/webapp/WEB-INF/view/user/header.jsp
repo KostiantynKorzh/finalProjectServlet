@@ -39,14 +39,14 @@
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
                         <a class="nav-link text-nowrap"
-                           href="${pageContext.request.contextPath}/user/requiredTests"><fmt:message
+                           href="${pageContext.request.contextPath}/user/requiredTests/?sorted=id&page=1"><fmt:message
                                 key="user.header.requiredTests"/></a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
                         <a class="nav-link text-nowrap"
-                           href="${pageContext.request.contextPath}/user/passedTests"><fmt:message
+                           href="${pageContext.request.contextPath}/user/passedTests/?sorted=id&page=1"><fmt:message
                                 key="user.header.passedTests"/></a>
                     </c:if>
                 </li>

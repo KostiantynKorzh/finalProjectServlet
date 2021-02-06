@@ -19,6 +19,6 @@ public class PassTestCommand implements Command {
         Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/pass/", ""));
         testService.passTest(userId, testId);
 
-        return "redirect:/user/requiredTests";
+        return "redirect:" + request.getHeader("Referer");
     }
 }

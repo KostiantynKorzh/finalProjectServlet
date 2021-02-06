@@ -29,12 +29,49 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public List<ResultDTO> findAllResultsByUserId(Long id) {
+    public List<ResultDTO> findAllByUserIdSortedByAndPaginated(Long id, String parameter, int page, int perPage) {
+        String query = "SELECT tests.id, tests.title, tests.subject, " +
+                "tests.difficulty, tests.duration, results.score, results.pass_timestamp " +
+                "FROM results INNER JOIN tests " +
+                "ON results.test_id = tests.id " +
+                "WHERE results.user_id = ? " +
+                "ORDER BY " + (parameter.equals("result") ? ("results.score") : ("tests." + parameter)) +
+                " LIMIT " + perPage +
+                " OFFSET " + page * perPage;
+        List<ResultDTO> results = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Test test = new Test.Builder()
+                        .id(resultSet.getLong("tests.id"))
+                        .title(resultSet.getString("tests.title"))
+                        .subject(Subject.valueOf(resultSet.getString("tests.subject")))
+                        .difficulty(Difficulty.values()[resultSet.getInt("tests.difficulty")])
+                        .duration(resultSet.getInt("tests.duration"))
+                        .build();
+                ResultDTO result = new ResultDTO.Builder()
+                        .test(test)
+                        .userId(id)
+                        .score(resultSet.getInt("results.score"))
+                        .passTimestamp(resultSet.getTimestamp("results.pass_timestamp"))
+                        .build();
+
+                results.add(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    @Override
+    public List<ResultDTO> findAllByUserId(Long id) {
 //        String query = "SELECT test_id FROM results WHERE user_id= ?";
         String query = "SELECT tests.id, tests.title, tests.subject, " +
                 "tests.difficulty, tests.duration, results.score, results.pass_timestamp " +
                 "FROM results INNER JOIN tests " +
-                "ON results.test_id = tests.id "+
+                "ON results.test_id = tests.id " +
                 "WHERE results.user_id = ?";
         List<ResultDTO> results = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {

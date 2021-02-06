@@ -23,12 +23,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/profile"><fmt:message key="common.header.profile"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/profile"><fmt:message key="common.header.profile"/></a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page"
-                       href="${pageContext.request.contextPath}/admin/tests"><fmt:message key="admin.header.tests"/></a>
+                       href="${pageContext.request.contextPath}/admin/tests/?sorted=id&page=1"><fmt:message key="admin.header.tests"/></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page"

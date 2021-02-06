@@ -1,10 +1,12 @@
 package me.project.model.service;
 
-import me.project.model.dao.RoleDao;
+import me.project.model.dao.ResultDao;
+import me.project.model.dao.TestDao;
 import me.project.model.dao.UserDao;
 import me.project.model.dao.factory.DaoFactory;
+import me.project.model.dto.CompleteTestDTO;
+import me.project.model.dto.ResultDTO;
 import me.project.model.entity.User;
-import me.project.model.entity.enums.Role;
 
 import java.util.List;
 
@@ -36,9 +38,10 @@ public class UserService {
         }
     }
 
+
     public List<User> getUsersSortedByAndPaginated(String parameter, int page, int perPage) {
         try (UserDao userDao = daoFactory.createUserFactory()) {
-            return userDao.findAllSortedByWithPagination(parameter, page, perPage);
+            return userDao.findAllSortedByAndPaginated(parameter, page, perPage);
         }
     }
 

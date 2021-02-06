@@ -70,16 +70,26 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item"><a class="page-link"
-                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page-1}">Previous</a>
+                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page-1}"><</a>
             </li>
             <c:forEach begin="1" end="${requestScope.pages}" varStatus="loop">
-                <li class="page-item">
-                    <a class="page-link"
-                       href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
-                </li>
+                <c:choose>
+                    <c:when test="${loop.index==requestScope.page}">
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
             <li class="page-item"><a class="page-link"
-                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page+1}">Next</a>
+                                     href="${pageContext.request.contextPath}/admin/users/?sorted=${requestScope.parameter}&page=${requestScope.page+1}">></a>
             </li>
         </ul>
     </nav>

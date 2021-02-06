@@ -1,20 +1,16 @@
 package me.project.model.service;
 
-import me.project.model.dao.RequiredTestDao;
-import me.project.model.dao.ResultDao;
-import me.project.model.dao.TestDao;
-import me.project.model.dao.UserDao;
+import me.project.model.dao.*;
 import me.project.model.dao.factory.DaoFactory;
+import me.project.model.dto.CompleteTestDTO;
 import me.project.model.dto.ResultDTO;
-import me.project.model.entity.RequiredTest;
-import me.project.model.entity.Test;
-import me.project.model.entity.User;
+import me.project.model.dto.TestDTO;
+import me.project.model.entity.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class TestService {
 
@@ -25,6 +21,8 @@ public class TestService {
     ResultDao resultDao = DaoFactory.getInstance().createResultFactory();
     UserDao userDao = DaoFactory.getInstance().createUserFactory();
     RequiredTestDao requiredTestDao = DaoFactory.getInstance().createRequiredTestFactory();
+    QuestionDao questionDao = DaoFactory.getInstance().createQuestionFactory();
+    AnswerDao answerDao = DaoFactory.getInstance().createAnswerFactory();
 
 
     private TestService() {
@@ -33,17 +31,72 @@ public class TestService {
     public void passTest(Long userId, Long testId) {
         User user = userDao.findById(userId);
         Test test = testDao.findById(testId);
-        Random rand = new Random();
-        resultDao.create(
-                new ResultDTO.Builder()
-                        .userId(userId)
-                        .test(test)
-                        .score(rand.nextInt(100))
-                        .passTimestamp(new Timestamp(System.currentTimeMillis()))
-                        .build());
+        resultDao.create(createResultObject(userId, test, new Random().nextInt(100)));
         resultDao.close();
         requiredTestDao.delete(new RequiredTest(user, test));
         requiredTestDao.close();
+    }
+
+    public ResultDTO createResultObject(Long userId, Test test, int score) {
+        return new ResultDTO.Builder()
+                .userId(userId)
+                .test(test)
+                .score(score)
+                .passTimestamp(new Timestamp(System.currentTimeMillis()))
+                .build();
+    }
+
+    public TestDTO getTestWithQuestionsAndAnswersByTestId(Long testId) {
+        Test test = testDao.findById(testId);
+        List<Question> questions = questionDao.findAllByTestId(testId);
+        List<Answer> answers = answerDao.findAllByTestId(testId);
+        return new TestDTO(test, questions, answers);
+    }
+
+    public void checkCompletedTestAndCreateResult(Long userId, Long testId, List<CompleteTestDTO> completeTests) {
+        TestDTO testDTO = getTestWithQuestionsAndAnswersByTestId(testId);
+        int correctAnswers = 0;
+        for (Question question : testDTO.getQuestions()) {
+            List<Long> correctAnswersForParticularQuestion =
+                    testDTO.getAnswers()
+                            .stream()
+                            .filter(answer -> answer.getQuestionId().equals(question.getId()))
+                            .filter(Answer::isCorrect)
+                            .map(Answer::getId)
+                            .collect(Collectors.toList());
+
+            List<Long> chosenAnswersFromUser = completeTests.stream()
+                    .filter(test -> test.getQuestionId().equals(question.getId()))
+                    .flatMap(test -> Arrays.stream(test.getAnswers().clone()))
+                    .filter(CompleteTestDTO.Answer::isChecked)
+                    .map(CompleteTestDTO.Answer::getAnswerId)
+                    .collect(Collectors.toList());
+
+
+//            System.out.println("Question: " + question.getQuestionText());
+//            System.out.println(correctAnswersForParticularQuestion);
+//            System.out.println(chosenAnswersFromUser);
+//            System.out.println(correctAnswersForParticularQuestion.size() == chosenAnswersFromUser.size() &&
+//                    correctAnswersForParticularQuestion.containsAll(chosenAnswersFromUser));
+            if (areAnswersMatch(correctAnswersForParticularQuestion, chosenAnswersFromUser)) {
+                correctAnswers++;
+            }
+        }
+        System.out.println(correctAnswers);
+        System.out.println();
+        int score = (int) (correctAnswers * 1.0 / testDTO.getQuestions().size() * 100);
+
+        resultDao.create(createResultObject(userId, testDao.findById(testId), score));
+        resultDao.close();
+        User user = userDao.findById(userId);
+        Test test = testDao.findById(testId);
+        requiredTestDao.delete(new RequiredTest(user, test));
+        requiredTestDao.close();
+    }
+
+    private boolean areAnswersMatch(List<Long> correctAnswersForParticularQuestion, List<Long> chosenAnswersFromUser) {
+        return correctAnswersForParticularQuestion.size() == chosenAnswersFromUser.size() &&
+                correctAnswersForParticularQuestion.containsAll(chosenAnswersFromUser);
     }
 
     public void removeFromRequired(Long userId, Long testId) {
@@ -64,7 +117,7 @@ public class TestService {
         List<Test> allTests = testDao.findAll();
         List<Test> requiredTests = testDao.findAllRequiredTestsByUserId(userId);
         List<Test> passedTests = new ArrayList<>();
-        resultDao.findAllResultsByUserId(userId)
+        resultDao.findAllByUserId(userId)
                 .forEach(resultDTO -> passedTests.add(resultDTO.getTest()));
         allTests.removeAll(requiredTests);
         allTests.removeAll(passedTests);
@@ -80,6 +133,14 @@ public class TestService {
         testDao.deleteById(id);
     }
 
+    public List<Test> getTestsSortedByAndPaginated(String parameter, int page, int perPage) {
+        return testDao.findAllSortedByAndPaginated(parameter, page, perPage);
+    }
+
+    public List<Test> getRequiredTestsByUserIdSortedByAndPaginated(Long id, String parameter, int page, int perPage) {
+        return testDao.findAllByUserIdSortedByAndPaginated(id, parameter, page, perPage);
+    }
+
     public List<Test> getRequiredTests(Long userId) {
         return testDao.findAllRequiredTestsByUserId(userId);
     }
@@ -89,12 +150,12 @@ public class TestService {
     }
 
     public List<ResultDTO> getResults(Long userId) {
-        return resultDao.findAllResultsByUserId(userId);
+        return resultDao.findAllByUserId(userId);
     }
 
     public Double getAverageGradeOfPassedTests(Long userId) {
         AtomicReference<Double> average = new AtomicReference<>(0.0);
-        List<ResultDTO> results = resultDao.findAllResultsByUserId(userId);
+        List<ResultDTO> results = resultDao.findAllByUserId(userId);
         if (results.size() == 0) {
             return 0.0;
         }
@@ -102,8 +163,12 @@ public class TestService {
         return average.get() / results.size();
     }
 
+    public List<ResultDTO> getResultsByUserIdSortedByAndPaginated(Long id, String parameter, int page, int perPage) {
+        return resultDao.findAllByUserIdSortedByAndPaginated(id, parameter, page, perPage);
+    }
+
     public Integer getPassedTestsCount(Long userId) {
-        return resultDao.findAllResultsByUserId(userId).size();
+        return resultDao.findAllByUserId(userId).size();
     }
 
     public static TestService getInstance() {

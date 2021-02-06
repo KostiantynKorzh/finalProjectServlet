@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface UserDao extends Dao<User> {
     User findByLoginAndPassword(String login, String password);
-    List<User> findAllSortedByWithPagination(String parameter, int page, int perPage);
+    List<User> findAllSortedByAndPaginated(String parameter, int page, int perPage);
+
 }

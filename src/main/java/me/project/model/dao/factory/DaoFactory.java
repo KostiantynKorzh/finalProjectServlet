@@ -19,6 +19,10 @@ public abstract class DaoFactory {
 
     public abstract RequiredTestDao createRequiredTestFactory();
 
+    public abstract QuestionDao createQuestionFactory();
+
+    public abstract AnswerDao createAnswerFactory();
+
 
     // ------ ABSTRACT FACTORY ------ //
     public static DaoFactory getInstance(){

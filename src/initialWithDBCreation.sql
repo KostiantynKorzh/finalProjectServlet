@@ -222,9 +222,9 @@ VALUES (5, '12', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (6, '12', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
-VALUES (6, '24', true);
+VALUES (6, '24', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
-VALUES (6, '82', false);
+VALUES (6, '72', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (6, '168', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
@@ -234,7 +234,7 @@ VALUES (7, '54', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (7, '56', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
-VALUES (7, '52', true);
+VALUES (7, '42', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (8, '100', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
@@ -301,7 +301,7 @@ VALUES (14, '50', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (14, '12', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
-VALUES (14, '10', true);
+VALUES (14, '5', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (15, '11', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
@@ -354,7 +354,7 @@ VALUES (19, 'twelve', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (19, 'eleven', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
-VALUES (19, 'twelve', false);
+VALUES (19, 'twelfe', false);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)
 VALUES (20, 'twelve', true);
 INSERT INTO testing_app_db.answers(question_id, answer_text, is_correct)

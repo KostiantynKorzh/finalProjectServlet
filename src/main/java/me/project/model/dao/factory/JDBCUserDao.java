@@ -64,7 +64,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAllSortedByWithPagination(String parameter, int page, int perPage) {
+    public List<User> findAllSortedByAndPaginated(String parameter, int page, int perPage) {
         List<User> sortedAndPaginatedUsers = new ArrayList<>();
         String query = "SELECT * " +
                 "FROM users " +

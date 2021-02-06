@@ -18,6 +18,6 @@ public class DeleteUserCommand implements Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/admin/users/?sorted=";
+        return "redirect:" + request.getHeader("Referer");
     }
 }

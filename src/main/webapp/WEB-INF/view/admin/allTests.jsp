@@ -17,11 +17,31 @@
     <table class="table" id="table">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col"><fmt:message key="admin.allTests.title"/></th>
-            <th scope="col"><fmt:message key="admin.allTests.subject"/></th>
-            <th scope="col"><fmt:message key="admin.allTests.difficulty"/></th>
-            <th scope="col"><fmt:message key="admin.allTests.duration"/></th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/tests/?sorted=id&page=${requestScope.page}">
+                    id
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/tests/?sorted=title&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.title"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/tests/?sorted=subject&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.subject"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/tests/?sorted=difficulty&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.difficulty"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/admin/tests/?sorted=duration&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.duration"/>
+                </a>
+            </th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -46,6 +66,34 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/admin/tests/?sorted=${requestScope.parameter}&page=${requestScope.page-1}"><</a>
+            </li>
+            <c:forEach begin="1" end="${requestScope.pages}" varStatus="loop">
+                <c:choose>
+                    <c:when test="${loop.index==requestScope.page}">
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/tests/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/admin/tests/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/admin/tests/?sorted=${requestScope.parameter}&page=${requestScope.page+1}">></a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 </body>
 </html>

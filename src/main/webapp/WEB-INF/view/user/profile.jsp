@@ -14,7 +14,7 @@
 <body>
 <%@include file="header.jsp" %>
 
-<div class="card text-center" style="width: 100%;">
+<div class="card text-center border-0" style="width: 100%;">
     <div class="card-body">
         <h1 class="card-title" style="height: 100px">
             <c:out value="${requestScope.userToInfo.firstName}"/> <c:out value="${requestScope.userToInfo.lastName}"/>
@@ -27,11 +27,11 @@
                 <div class="col-4">
                     <div class="list-group" id="list-tab" role="tablist">
                         <a class="list-group-item list-group-item-action active" id="overall-list" data-toggle="list"
-                           href="#list-home" role="tab" aria-controls="home">Overall Tests</a>
+                           href="#list-home" role="tab" aria-controls="home"><fmt:message key="user.profile.overallPassedTests"/></a>
                         <a class="list-group-item list-group-item-action" id="avg-list" data-toggle="list"
-                           href="#list-profile" role="tab" aria-controls="profile">Average Grade</a>
+                           href="#list-profile" role="tab" aria-controls="profile"><fmt:message key="user.profile.averageGrade"/></a>
                         <a class="list-group-item list-group-item-action" id="todo-list" data-toggle="list"
-                           href="#list-messages" role="tab" aria-controls="messages">Tests To Do</a>
+                           href="#list-messages" role="tab" aria-controls="messages"><fmt:message key="user.profile.overallTestsToDo"/></a>
                     </div>
                 </div>
                 <div class="col-8">
@@ -52,8 +52,6 @@
         </div>
     </div>
 
-</div>
-</div>
 </div>
 
 <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--%>

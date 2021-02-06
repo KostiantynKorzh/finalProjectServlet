@@ -37,6 +37,16 @@ public class JDBCDaoFactory extends DaoFactory {
         return new JDBCRequiredTestDao(getConnection());
     }
 
+    @Override
+    public AnswerDao createAnswerFactory() {
+        return new JDBCAnswerDao(getConnection());
+    }
+
+    @Override
+    public QuestionDao createQuestionFactory() {
+        return new JDBCQuestionDao(getConnection());
+    }
+
     private Connection getConnection() {
         try {
             return dataSource.getConnection();

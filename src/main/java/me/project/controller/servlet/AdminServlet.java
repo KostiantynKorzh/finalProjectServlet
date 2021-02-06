@@ -24,9 +24,10 @@ public class AdminServlet extends HttpServlet {
     @Override
     public void init() {
         commands.put("home", new HomeCommand());
-        commands.put("tests", new GetTestsCommand());
+        commands.put("tests/", new GetTestsCommand());
         commands.put("users/", new GetUsersCommand(userService));
         commands.put("users/edit", new EditUserCommand());
+        commands.put("profile", new ProfileCommand());
     }
 
     @Override

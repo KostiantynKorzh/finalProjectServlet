@@ -12,6 +12,7 @@ public class View {
     public static final String REQUIRED_TESTS_PAGE = "/WEB-INF/view/user/requiredTests.jsp";
     public static final String PASSED_TESTS_PAGE = "/WEB-INF/view/user/passedTests.jsp";
     public static final String HOME_PAGE_USER = "/WEB-INF/view/user/home.jsp";
+    public static final String TAKE_TEST_PAGE_USER = "/WEB-INF/view/user/takeTest.jsp";
 
 
     public static final String INDEX_PAGE = "/WEB-INF/view/common/index.jsp";

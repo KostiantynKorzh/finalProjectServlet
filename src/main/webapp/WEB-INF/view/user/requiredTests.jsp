@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="me.project.controller.servlet.Mes"/>
+<fmt:setBundle basename="mes"/>
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -17,10 +17,26 @@
     <table class="table" id="table">
         <thead>
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Difficulty</th>
-            <th scope="col">Duration</th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/user/requiredTests/?sorted=title&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.title"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/user/requiredTests/?sorted=subject&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.subject"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/user/requiredTests/?sorted=difficulty&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.difficulty"/>
+                </a>
+            </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/user/requiredTests/?sorted=duration&page=${requestScope.page}">
+                    <fmt:message key="admin.allTests.duration"/>
+                </a>
+            </th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -46,16 +62,35 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/user/requiredTests/?sorted=${requestScope.parameter}&page=${requestScope.page-1}"><</a>
+            </li>
+            <c:forEach begin="1" end="${requestScope.pages}" varStatus="loop">
+                <c:choose>
+                    <c:when test="${loop.index==requestScope.page}">
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/user/requiredTests/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="${pageContext.request.contextPath}/user/requiredTests/?sorted=${requestScope.parameter}&page=${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <li class="page-item"><a class="page-link"
+                                     href="${pageContext.request.contextPath}/user/requiredTests/?sorted=${requestScope.parameter}&page=${requestScope.page+1}">></a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-        crossorigin="anonymous"></script>
 </body>
 </html>

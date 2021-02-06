@@ -13,6 +13,6 @@ public class DeleteTestCommand implements Command {
     public String execute(HttpServletRequest request) {
         Long id = Long.valueOf(request.getRequestURI().replaceAll(".*/delete/", ""));
         testService.deleteTestById(id);
-        return "redirect:/admin/tests";
+        return "redirect:" + request.getHeader("Referer");
     }
 }
