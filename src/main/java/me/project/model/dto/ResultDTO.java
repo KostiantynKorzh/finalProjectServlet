@@ -1,15 +1,17 @@
-package me.project.model.entity;
+package me.project.model.dto;
+
+import me.project.model.entity.Test;
 
 import java.sql.Timestamp;
 
-public class Result {
+public class ResultDTO {
 
     private Test test;
     private Long userId;
     private Integer score;
     private Timestamp passTimestamp;
 
-    public Result() {
+    public ResultDTO() {
     }
 
 
@@ -48,10 +50,10 @@ public class Result {
 
     public static class Builder {
 
-        Result result;
+        ResultDTO result;
 
         public Builder() {
-            result = new Result();
+            result = new ResultDTO();
         }
 
         public Builder userId(Long id) {
@@ -74,7 +76,7 @@ public class Result {
             return this;
         }
 
-        public Result build() {
+        public ResultDTO build() {
             return result;
         }
 

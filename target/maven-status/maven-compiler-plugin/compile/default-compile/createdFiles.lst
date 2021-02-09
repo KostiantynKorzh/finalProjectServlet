@@ -1,5 +1,6 @@
 me/project/controller/command/commands_user/HomeCommand.class
 me/project/model/entity/Answer$Builder.class
+me/project/model/dto/ResultDTO$Builder.class
 me/project/model/dao/QuestionDao.class
 me/project/controller/command/commands_admin/ProfileCommand.class
 me/project/model/dao/factory/JDBCRoleDao.class
@@ -8,14 +9,12 @@ me/project/model/dao/AnswerDao.class
 me/project/model/entity/Test.class
 me/project/model/entity/User.class
 me/project/model/dao/factory/JDBCDaoFactory.class
-me/project/model/entity/Result$Builder.class
 me/project/controller/command/commands_user/PassedTestsCommand.class
 me/project/model/entity/Question$Builder.class
 me/project/model/entity/RequiredTest.class
 me/project/model/dto/CompleteTestDTO.class
 me/project/controller/command/commands_user/TakeTestCommand$1.class
 me/project/controller/command/commands_user/RequiredTestsCommand.class
-me/project/model/service/ResultService.class
 me/project/controller/View.class
 me/project/controller/command/commands_user/PassTestCommand.class
 me/project/model/entity/Question.class
@@ -28,13 +27,13 @@ me/project/controller/servlet/AuthServlet.class
 me/project/controller/command/commands_admin/GetUsersCommand.class
 me/project/model/dao/RequiredTestDao.class
 me/project/controller/listener/ContextListener.class
-me/project/model/entity/Result.class
 me/project/controller/command/commands_admin/DeleteTestCommand.class
 me/project/controller/command/commands_admin/HomeCommand.class
 me/project/model/dto/TestDTO.class
 me/project/model/entity/enums/Subject.class
 me/project/model/dao/ResultDao.class
 me/project/controller/command/util/Validation.class
+me/project/model/dto/ResultDTO.class
 me/project/model/dto/UserDTO.class
 me/project/controller/command/commands_admin/EditTestCommand.class
 me/project/controller/servlet/AdminServlet.class

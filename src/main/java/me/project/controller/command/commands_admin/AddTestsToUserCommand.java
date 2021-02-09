@@ -2,10 +2,10 @@ package me.project.controller.command.commands_admin;
 
 import me.project.controller.View;
 import me.project.controller.command.Command;
-import me.project.model.entity.Result;
+import me.project.model.dto.ResultDTO;
+import me.project.model.dto.UserDTO;
 import me.project.model.entity.Test;
 import me.project.model.entity.User;
-import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 import me.project.model.service.UserService;
 
@@ -15,7 +15,6 @@ import java.util.List;
 public class AddTestsToUserCommand implements Command {
 
     TestService testService = TestService.getInstance();
-    ResultService resultService = ResultService.getInstance();
     UserService userService;
 
     @Override
@@ -26,11 +25,7 @@ public class AddTestsToUserCommand implements Command {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")
                     .replaceAll("/add/.*", ""));
             Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/add/", ""));
-            try {
-                testService.makeTestsRequired(userId, testId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            testService.makeTestsRequired(userId, testId);
             return "redirect:/admin/users/addTests/" + userId;
         } else if (request.getRequestURI().contains("/remove/")) {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")
@@ -44,9 +39,9 @@ public class AddTestsToUserCommand implements Command {
             request.setAttribute("availableTests", availableTests);
             List<Test> requiredTests = testService.getRequiredTests(userId);
             request.setAttribute("requiredTests", requiredTests);
-            List<Result> passedTests = resultService.getResults(userId);
+            List<ResultDTO> passedTests = testService.getResults(userId);
             request.setAttribute("passedTests", passedTests);
-            userService = UserService.getInstance();
+            userService = new UserService();
             User user = userService.getUserById(userId);
             request.setAttribute("userToAdd",
                     user.getFirstName() + " " + user.getLastName());

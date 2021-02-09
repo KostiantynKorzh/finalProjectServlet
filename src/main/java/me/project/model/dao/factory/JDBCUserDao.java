@@ -17,7 +17,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void create(User entity) throws Exception {
+    public void create(User entity) {
 
         String queryUser = "INSERT INTO users (first_name, last_name, email, password, created) values (?, ?, ?, ?, NOW());";
         String queryRole = "INSERT INTO user_roles (user_id, role_id) values ((select MAX(id) FROM users), ?);";
@@ -29,7 +29,7 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.setString(4, entity.getPassword());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            throw new Exception(e);
+            e.printStackTrace();
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryRole)) {
             preparedStatement.setInt(1, entity.getRole().ordinal() + 1);
@@ -39,6 +39,7 @@ public class JDBCUserDao implements UserDao {
         }
     }
 
+    // create method for user creation from result set
     @Override
     public User findById(Long id) {
         String query = "SELECT * FROM users WHERE id=" + id + ";";
@@ -46,24 +47,20 @@ public class JDBCUserDao implements UserDao {
             ResultSet resultSet = statement.executeQuery(query);
             User user = null;
             while (resultSet.next()) {
-                user = userCreationFromResultSet(resultSet);
+                user = new User.Builder()
+                        .id(resultSet.getLong("id"))
+                        .firstName(resultSet.getString("first_name"))
+                        .lastName(resultSet.getString("last_name"))
+                        .login(resultSet.getString("email"))
+                        .password(resultSet.getString("password"))
+                        .role(Role.USER)
+                        .build();
             }
             return user;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private User userCreationFromResultSet(ResultSet resultSet) throws SQLException {
-        return new User.Builder()
-                .id(resultSet.getLong("id"))
-                .firstName(resultSet.getString("first_name"))
-                .lastName(resultSet.getString("last_name"))
-                .login(resultSet.getString("email"))
-                .password(resultSet.getString("password"))
-                .role(Role.USER)
-                .build();
     }
 
     @Override
@@ -148,7 +145,15 @@ public class JDBCUserDao implements UserDao {
             User user;
             ResultSetMetaData rsmd = resultSet.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
+//            for (int i = 1; i <= columnsNumber; i++) {
+//                System.out.print(rsmd.getColumnLabel(i) + ", ");
+//            }
+//            System.out.println();
             while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    System.out.print(resultSet.getString(i) + ", ");
+                }
+                System.out.println();
                 user = new User.Builder()
                         .id(resultSet.getLong("id"))
                         .firstName(resultSet.getString("first_name"))
@@ -196,9 +201,11 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void delete(User entity) {
-        String queryResult = "ALTER TABLE `testing_app_db`.`results` DROP FOREIGN KEY (`user_id`);";
+        String queryResult = "ALTER TABLE `testing_app_db`.`results` DROP FOREIGN KEY (`user_id`);" +
+                "ALTER TABLE results ADD CONSTRAINT user_id_foreign FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;";
         String queryUser = "DELETE FROM users WHERE id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryResult)) {
+//            preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,6 +251,7 @@ public class JDBCUserDao implements UserDao {
             e.printStackTrace();
         }
 
+//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return null;
     }
 

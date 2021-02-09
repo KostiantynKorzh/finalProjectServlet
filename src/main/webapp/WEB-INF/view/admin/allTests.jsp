@@ -16,8 +16,7 @@
 <div class="container">
 
     <button type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#createTestModal">
-        <fmt:message key="admin.allTests.createTest"/>
+            data-toggle="modal" data-target="#createTestModal">Create Test
     </button>
 
     <table class="table" id="table">
@@ -60,9 +59,9 @@
                 <th><c:out value="${test.subject}"/></th>
                 <th><c:out value="${test.difficulty}"/></th>
                 <th><c:out value="${test.duration}"/></th>
-<%--                <th><a class="btn btn-primary"--%>
-<%--                       href="${pageContext.request.contextPath}/admin/tests/edit/${test.id}">--%>
-<%--                    <fmt:message key="admin.allUsers.edit"/></a>--%>
+                <th><a class="btn btn-primary"
+                       href="${pageContext.request.contextPath}/admin/tests/edit/${test.id}">
+                    <fmt:message key="admin.allUsers.edit"/></a>
                 <th>
                     <a class="btn btn-danger"
                        href="${pageContext.request.contextPath}/admin/tests/delete/${test.id}">

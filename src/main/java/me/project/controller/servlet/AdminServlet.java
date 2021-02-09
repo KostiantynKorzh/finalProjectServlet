@@ -19,7 +19,7 @@ public class AdminServlet extends HttpServlet {
 
     Map<String, Command> commands = new HashMap<>();
     String path;
-    UserService userService = UserService.getInstance();
+    UserService userService = new UserService();
 
     @Override
     public void init() {
@@ -42,6 +42,8 @@ public class AdminServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         path = req.getRequestURI().replaceAll(".*/admin/", "");
+
+        System.out.println("(in admin) PATH: " + path);
 
         if (path.matches("users/delete/[0-9]+")) {
             commands.put(path, new DeleteUserCommand());

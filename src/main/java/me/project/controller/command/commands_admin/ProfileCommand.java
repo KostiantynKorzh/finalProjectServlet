@@ -18,7 +18,7 @@ public class ProfileCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        userService = UserService.getInstance();
+        userService = new UserService();
         testService = TestService.getInstance();
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");

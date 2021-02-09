@@ -20,7 +20,7 @@
         <h4 class="card-subtitle text-center">${requestScope.subject}</h4>
         <h4 class="card-subtitle text-center">${requestScope.difficulty}</h4>
         <h4 class="card-subtitle text-center">${requestScope.duration}</h4>
-        <button id="addBtn" class="btn btn-success"><fmt:message key="admin.createTest.addQuestionBtn"/></button>
+        <button id="addBtn" class="btn btn-success">Add Question</button>
         <%--        <button id="addNewAnswerBtn-1" class="btn btn-success">Add Answer</button>--%>
     </div>
     <div id="qaBlock">
@@ -31,7 +31,7 @@
                     <button id="deleteQuestionBtn" class="btn btn-danger">-</button>
                 </div>
                 <textarea class="form-control" style="background-color: lightblue; border: solid coral 3px"
-                          aria-label="With textarea" placeholder="<fmt:message key="admin.createTest.yourQuestion"/>"></textarea>
+                          aria-label="With textarea" placeholder="Your Question"></textarea>
                 <div class="input-group-append">
                     <button class="btn btn-success addNewAnswerBtn">+</button>
                 </div>
@@ -55,7 +55,7 @@
             </form>
         </ul>
     </div>
-    <input class="btn btn-success" type="submit" value=<fmt:message key="admin.createTest.submit"/> onclick="submitTest()"/>
+    <input type="submit" value="Submit Test" onclick="submitTest()"/>
 
 </div>
 
@@ -74,7 +74,7 @@
             deleteBtn +
             '</div>' +
             '<textarea class="form-control" style="background-color: lightblue; border: solid coral 3px"' +
-            'aria-label="With textarea" placeholder=<fmt:message key="admin.createTest.yourQuestion"/>></textarea>' +
+            'aria-label="With textarea" placeholder="Your Question"></textarea>' +
             '<div class="input-group-append">' +
             '<button class="btn btn-success addNewAnswerBtn">+</button>' +
             '</div>' +

@@ -7,7 +7,6 @@ import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.model.dto.CompleteTestDTO;
 import me.project.model.dto.UserDTO;
-import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import java.util.Scanner;
 
 public class TakeTestCommand implements Command {
     TestService testService = TestService.getInstance();
-    ResultService resultService = ResultService.getInstance();
     private final ObjectMapper jsonMapper = new ObjectMapper();
 
     @Override
@@ -36,7 +34,7 @@ public class TakeTestCommand implements Command {
             }
             HttpSession session = request.getSession();
             UserDTO user = (UserDTO) session.getAttribute("user");
-            resultService.checkCompletedTestAndCreateResult(user.getId(), testId, tests);
+            testService.checkCompletedTestAndCreateResult(user.getId(), testId, tests);
             return "redirect:/user/requiredTests/?sorted=id&page=1";
         } else {
             request.setAttribute("test", testService.getTestWithQuestionsAndAnswersByTestId(testId));

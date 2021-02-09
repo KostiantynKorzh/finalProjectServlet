@@ -1,7 +1,7 @@
 package me.project.model.dao.factory;
 
 import me.project.model.dao.ResultDao;
-import me.project.model.entity.Result;
+import me.project.model.dto.ResultDTO;
 import me.project.model.entity.Test;
 import me.project.model.entity.enums.Difficulty;
 import me.project.model.entity.enums.Subject;
@@ -19,7 +19,7 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public List<Result> findAllSortedBy(String parameter) {
+    public List<ResultDTO> findAllSortedBy(String parameter) {
         return null;
     }
 
@@ -29,7 +29,7 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public List<Result> findAllByUserIdSortedByAndPaginated(Long id, String parameter, int page, int perPage) {
+    public List<ResultDTO> findAllByUserIdSortedByAndPaginated(Long id, String parameter, int page, int perPage) {
         String query = "SELECT tests.id, tests.title, tests.subject, " +
                 "tests.difficulty, tests.duration, results.score, results.pass_timestamp " +
                 "FROM results INNER JOIN tests " +
@@ -38,7 +38,7 @@ public class JDBCResultDao implements ResultDao {
                 "ORDER BY " + (parameter.equals("result") ? ("results.score") : ("tests." + parameter)) +
                 " LIMIT " + perPage +
                 " OFFSET " + page * perPage;
-        List<Result> results = new ArrayList<>();
+        List<ResultDTO> results = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -50,7 +50,7 @@ public class JDBCResultDao implements ResultDao {
                         .difficulty(Difficulty.values()[resultSet.getInt("tests.difficulty")])
                         .duration(resultSet.getInt("tests.duration"))
                         .build();
-                Result result = new Result.Builder()
+                ResultDTO result = new ResultDTO.Builder()
                         .test(test)
                         .userId(id)
                         .score(resultSet.getInt("results.score"))
@@ -66,14 +66,14 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public List<Result> findAllByUserId(Long id) {
+    public List<ResultDTO> findAllByUserId(Long id) {
 //        String query = "SELECT test_id FROM results WHERE user_id= ?";
         String query = "SELECT tests.id, tests.title, tests.subject, " +
                 "tests.difficulty, tests.duration, results.score, results.pass_timestamp " +
                 "FROM results INNER JOIN tests " +
                 "ON results.test_id = tests.id " +
                 "WHERE results.user_id = ?";
-        List<Result> results = new ArrayList<>();
+        List<ResultDTO> results = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,7 +85,7 @@ public class JDBCResultDao implements ResultDao {
                         .difficulty(Difficulty.values()[resultSet.getInt("tests.difficulty")])
                         .duration(resultSet.getInt("tests.duration"))
                         .build();
-                Result result = new Result.Builder()
+                ResultDTO result = new ResultDTO.Builder()
                         .test(test)
                         .userId(id)
                         .score(resultSet.getInt("results.score"))
@@ -101,7 +101,7 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public void create(Result entity) {
+    public void create(ResultDTO entity) {
         String query = "INSERT INTO results(user_id, test_id, score, pass_timestamp) " +
                 "values(?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -117,22 +117,22 @@ public class JDBCResultDao implements ResultDao {
     }
 
     @Override
-    public Result findById(Long id) {
+    public ResultDTO findById(Long id) {
         return null;
     }
 
     @Override
-    public List<Result> findAll() {
+    public List<ResultDTO> findAll() {
         return null;
     }
 
     @Override
-    public void update(Result entity) {
+    public void update(ResultDTO entity) {
 
     }
 
     @Override
-    public void delete(Result entity) {
+    public void delete(ResultDTO entity) {
 
     }
 

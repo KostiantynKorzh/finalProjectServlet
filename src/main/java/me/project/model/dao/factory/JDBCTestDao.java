@@ -29,6 +29,7 @@ public class JDBCTestDao implements TestDao {
             preparedStatement.setString(2, entity.getSubject().name());
             preparedStatement.setInt(3, entity.getDifficulty().ordinal());
             preparedStatement.setInt(4, entity.getDuration());
+//            preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

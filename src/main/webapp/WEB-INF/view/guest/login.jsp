@@ -51,12 +51,5 @@
     <p class="text-center"><a href="${pageContext.request.contextPath}/auth/signup"><fmt:message key="login.signup" bundle="${b}"/></a></p>
 </div>
 
-<script>
-    $(document).ready(function () {
-        if ('${requestScope.message}' != '') {
-            alert('${requestScope.message}');
-        }
-    });
-</script>
 </body>
 </html>

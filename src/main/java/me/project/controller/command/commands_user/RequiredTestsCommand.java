@@ -12,9 +12,11 @@ import java.util.List;
 
 public class RequiredTestsCommand implements Command {
 
+    TestService testService;
+
     @Override
     public String execute(HttpServletRequest request) {
-        TestService testService = TestService.getInstance();
+        testService = TestService.getInstance();
         int perPage = 2;
         String parameter = "id";
         int page = 1;

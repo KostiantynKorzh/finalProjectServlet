@@ -3,15 +3,15 @@ package me.project.model.entity;
 public class RequiredTest {
 
     private Long id;
-    private Long userId;
-    private Long testId;
+    private User user;
+    private Test test;
 
     public RequiredTest() {
     }
 
-    public RequiredTest(Long userId, Long testId) {
-        this.userId = userId;
-        this.testId = testId;
+    public RequiredTest(User user, Test test) {
+        this.user = user;
+        this.test = test;
     }
 
     public Long getId() {
@@ -22,19 +22,19 @@ public class RequiredTest {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getTestId() {
-        return testId;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTestId(Long testId) {
-        this.testId = testId;
+    public void setTest(Test test) {
+        this.test = test;
     }
 }

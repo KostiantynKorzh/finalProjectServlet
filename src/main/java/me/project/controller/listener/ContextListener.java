@@ -1,28 +1,34 @@
 package me.project.controller.listener;
 
+
+import me.project.model.entity.User;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.File;
-
-import org.apache.log4j.PropertyConfigurator;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
 
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-        ServletContext context = event.getServletContext();
-        String log4jConfigFile = context.getInitParameter("log4j-config-location");
-        String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
+    private String lang;
+    private User user;
 
-        PropertyConfigurator.configure(fullPath);
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+
+        final ServletContext servletContext = servletContextEvent.getServletContext();
+
+        lang = "en";
+        user = null;
+
+        servletContext.setAttribute("lang", lang);
+        servletContext.setAttribute("user", user);
 
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent event) {
-        // do nothing
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
+
 }

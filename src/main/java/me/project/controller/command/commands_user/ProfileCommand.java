@@ -5,7 +5,6 @@ import me.project.controller.command.Command;
 import me.project.model.dto.UserDTO;
 import me.project.model.dto.UserInfoDTO;
 import me.project.model.entity.User;
-import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 import me.project.model.service.UserService;
 
@@ -16,16 +15,18 @@ import java.text.NumberFormat;
 
 public class ProfileCommand implements Command {
 
-    ResultService resultService = ResultService.getInstance();
-    UserService userService = UserService.getInstance();
+    private TestService testService;
+    private UserService userService;
 
     @Override
     public String execute(HttpServletRequest request) {
-        TestService testService = TestService.getInstance();
+
+        userService = new UserService();
+        testService = TestService.getInstance();
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");
-        request.setAttribute("overall", resultService.getPassedTestsCount(user.getId()));
-        String avgGrade = String.format("%.2f", resultService.getAverageGradeOfPassedTests(user.getId()));
+        request.setAttribute("overall", testService.getPassedTestsCount(user.getId()));
+        String avgGrade = String.format("%.2f", testService.getAverageGradeOfPassedTests(user.getId()));
         request.setAttribute("avgGrade", avgGrade);
         request.setAttribute("todo", testService.getRequiredTestsCount(user.getId()));
         User userTemp = userService.getUserById(user.getId());

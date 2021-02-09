@@ -3,8 +3,7 @@ package me.project.controller.command.commands_user;
 import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.model.dto.UserDTO;
-import me.project.model.entity.Result;
-import me.project.model.service.ResultService;
+import me.project.model.dto.ResultDTO;
 import me.project.model.service.TestService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,6 @@ import java.util.List;
 public class PassedTestsCommand implements Command {
 
     TestService testService;
-    ResultService resultService = ResultService.getInstance();
-
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -35,7 +32,7 @@ public class PassedTestsCommand implements Command {
         if (page <= 1) {
             page = 1;
         }
-        pages = (int) Math.ceil(resultService.getPassedTestsCount(user.getId()) * 1.0 / perPage);
+        pages = (int) Math.ceil(testService.getPassedTestsCount(user.getId()) * 1.0 / perPage);
         request.setAttribute("pages", pages);
         if (page > pages - 1) {
             page = pages;
@@ -43,7 +40,7 @@ public class PassedTestsCommand implements Command {
         request.setAttribute("page", page);
         request.setAttribute("parameter", parameter);
 
-        List<Result> passedTests = resultService.getResultsByUserIdSortedByAndPaginated(user.getId(), parameter, page - 1, perPage);
+        List<ResultDTO> passedTests = testService.getResultsByUserIdSortedByAndPaginated(user.getId(), parameter, page - 1, perPage);
         request.setAttribute("passedTests", passedTests);
 
         return View.PASSED_TESTS_PAGE;
