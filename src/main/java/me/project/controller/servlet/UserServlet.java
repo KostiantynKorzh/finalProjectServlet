@@ -3,6 +3,8 @@ package me.project.controller.servlet;
 import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.controller.command.commands_user.*;
+import me.project.model.service.ResultService;
+import me.project.model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,8 +41,6 @@ public class UserServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getRequestURI().replaceAll(".*/user/", "");
 
-        System.out.println("PATH = " + path);
-
         if (path.matches("requiredTests/pass/[0-9]+.*")) {
             commands.put(path, new PassTestCommand());
         }
@@ -51,11 +51,9 @@ public class UserServlet extends HttpServlet {
         Command command = commands.getOrDefault(path,
                 (r) -> View.HOME_PAGE_USER);
         String page = command.execute(req);
-        System.out.println("PAGE " + page);
         if (page.contains("redirect:")) {
             resp.sendRedirect(page.replace("redirect:", ""));
         } else {
-            System.out.println("dispatcher");
             req.getRequestDispatcher(page).forward(req, resp);
         }
     }

@@ -2,6 +2,8 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/HomeCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/AuthFilter.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/AuthServlet.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/ResultService.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/entity/Result.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/TakeTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/GetTestsCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/RequiredTestDao.java
@@ -38,7 +40,6 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/AddTestsToUserCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/ProfileCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/RequiredTestsCommand.java
-/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/ResultDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/entity/User.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/CompleteTestDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/util/DBConnection.java

@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="me.project.controller.servlet.Mes"/>
+<fmt:setBundle basename="mes"/>
 
 
 <html>
@@ -11,10 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="text-center ">
 <%@include file="header.jsp" %>
-ADMIN HOME
-
-
+<h1 style="margin-top: 18%; font-size: 6rem"><fmt:message key="admin.home.hello"/></h1>
 </body>
 </html>

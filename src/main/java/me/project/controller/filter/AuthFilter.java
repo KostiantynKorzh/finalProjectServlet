@@ -1,7 +1,9 @@
 package me.project.controller.filter;
 
+
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,22 +34,21 @@ public class AuthFilter implements Filter {
 
         boolean loggedIn = session.getAttribute("user") != null;
 
-        boolean canGuest = req.getRequestURI().contains(loginURL)
+        boolean isAvailableForGuest = req.getRequestURI().contains(loginURL)
                 || req.getRequestURI().contains(signupURL);
 
         boolean lang = req.getRequestURI().contains(langUrl);
 
-        if (!loggedIn && !canGuest && !lang) {
+        if (!loggedIn && !isAvailableForGuest && !lang) {
             res.sendRedirect(loginURL);
             return;
         }
 
-        if (loggedIn && canGuest) {
+        if (loggedIn && isAvailableForGuest) {
             session.setAttribute("user", null);
             res.sendRedirect(loginURL);
             return;
         }
-
         filterChain.doFilter(req, res);
 
     }

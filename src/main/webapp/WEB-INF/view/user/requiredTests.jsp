@@ -51,12 +51,12 @@
                 <th>
                     <a class="btn btn-primary"
                        href="${pageContext.request.contextPath}/user/requiredTests/take/${test.id}"
-                       role="button">Take</a>
+                       role="button"><fmt:message key="user.requiredTests.take"/></a>
                 </th>
                 <th>
                     <a class="btn btn-primary"
                        href="${pageContext.request.contextPath}/user/requiredTests/pass/${test.id}"
-                       role="button">Pass</a>
+                       role="button"><fmt:message key="user.requiredTests.pass"/></a>
                 </th>
             </tr>
         </c:forEach>

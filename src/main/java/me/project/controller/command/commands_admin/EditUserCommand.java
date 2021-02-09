@@ -13,7 +13,7 @@ public class EditUserCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        userService = new UserService();
+        userService = UserService.getInstance();
         Long id = Long.valueOf(request.getParameter("id"));
         User user = userService.getUserById(id);
         user.setFirstName(request.getParameter("firstName"));

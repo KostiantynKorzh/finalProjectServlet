@@ -17,6 +17,7 @@
         margin: 50px auto;
         font-size: 15px;
     }
+
     .login-form form {
         margin-bottom: 15px;
         background: #f7f7f7;
@@ -56,10 +57,19 @@
                    required minlength="8" maxlength="25">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"><fmt:message key="login.signup" bundle="${b}"/></button>
+            <button type="submit" class="btn btn-primary btn-block"><fmt:message key="login.signup"
+                                                                                 bundle="${b}"/></button>
         </div>
     </form>
 </div>
+
+<script>
+    $(document).ready(function () {
+        if ('${requestScope.message}' != '') {
+            alert('${requestScope.message}');
+        }
+    });
+</script>
 
 </body>
 </html>

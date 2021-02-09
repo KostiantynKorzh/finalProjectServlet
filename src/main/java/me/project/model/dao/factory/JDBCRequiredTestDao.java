@@ -24,8 +24,8 @@ public class JDBCRequiredTestDao implements RequiredTestDao {
     public void create(RequiredTest entity) {
         String query = "INSERT INTO required_tests(user_id, test_id) values(?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setLong(1, entity.getUser().getId());
-            preparedStatement.setLong(2, entity.getTest().getId());
+            preparedStatement.setLong(1, entity.getUserId());
+            preparedStatement.setLong(2, entity.getTestId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,8 +56,8 @@ public class JDBCRequiredTestDao implements RequiredTestDao {
     public void delete(RequiredTest entity) {
         String query = "DELETE FROM required_tests WHERE user_id = ? AND test_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setLong(1, entity.getUser().getId());
-            preparedStatement.setLong(2, entity.getTest().getId());
+            preparedStatement.setLong(1, entity.getUserId());
+            preparedStatement.setLong(2, entity.getTestId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

@@ -29,7 +29,6 @@ public class AdminFilter implements Filter {
         boolean isAdmin = false;
 
         if (loggedIn) {
-            System.out.println(session.getAttribute("user"));
             isAdmin = ((UserDTO) session.getAttribute("user")).getRole().getName().equals("ADMIN");
         }
 

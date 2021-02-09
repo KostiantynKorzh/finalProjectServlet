@@ -37,7 +37,7 @@
         </ul>
     </c:forEach>
 
-    <input type="submit" value="Submit answers" onclick="submitAnswers()"/>
+    <input class="btn btn-success" type="submit" value=<fmt:message key="admin.createTest.submit"/> onclick="submitAnswers()"/>
 
 </div>
 
@@ -54,11 +54,8 @@
         };
         const allQa = [];
         for (let i = 0; i < formsCollection.length ; i++) {
-            // console.log((formsCollection.item(i).name));
             for (let j = 0; j < formsCollection.item(i).length ; j++) {
-                console.log(formsCollection.item(i).length)
-                // console.log(formsCollection.item(i).elements.item(j).name);
-                // console.log(formsCollection.item(i).elements.item(j).checked);
+                // console.log(formsCollection.item(i).length)
                 answers.push({
                     answerId: formsCollection.item(i).elements.item(j).name,
                     isChecked: formsCollection.item(i).elements.item(j).checked

@@ -1,16 +1,17 @@
 package me.project.model.service;
 
-import me.project.model.dao.ResultDao;
-import me.project.model.dao.TestDao;
 import me.project.model.dao.UserDao;
 import me.project.model.dao.factory.DaoFactory;
-import me.project.model.dto.CompleteTestDTO;
-import me.project.model.dto.ResultDTO;
 import me.project.model.entity.User;
 
 import java.util.List;
 
 public class UserService {
+
+    private static UserService userService;
+
+    private UserService() {
+    }
 
     DaoFactory daoFactory = DaoFactory.getInstance();
 
@@ -57,5 +58,15 @@ public class UserService {
         }
     }
 
+    public static UserService getInstance() {
+        if (userService == null) {
+            synchronized (TestService.class) {
+                if (userService == null) {
+                    userService = new UserService();
+                }
+            }
+        }
+        return userService;
+    }
 
 }
