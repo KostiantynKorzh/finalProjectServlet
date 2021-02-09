@@ -37,7 +37,8 @@
         <h2 class="text-center"><fmt:message key="login.welcome" bundle="${b}"/></h2>
         <div class="form-group">
             <input type="email" class="form-control" name="login"
-                   placeholder="<fmt:message key="login.login" bundle="${b}"/>" required="required">
+                   placeholder="<fmt:message key="login.login" bundle="${b}"/>"
+                   required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password"

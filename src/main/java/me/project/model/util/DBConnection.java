@@ -1,13 +1,8 @@
 package me.project.model.util;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.taglibs.standard.tag.common.sql.DataSourceWrapper;
 
 import javax.sql.DataSource;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DBConnection {
 

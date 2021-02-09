@@ -21,5 +21,6 @@ public class View {
     public static final String ALL_TESTS_PAGE = "/WEB-INF/view/admin/allTests.jsp";
     public static final String ADD_TESTS_TO_USER_PAGE = "/WEB-INF/view/admin/addTestsToUser.jsp";
     public static final String HOME_PAGE_ADMIN = "/WEB-INF/view/admin/home.jsp";
+    public static final String CREATE_TEST_PAGE_ADMIN = "/WEB-INF/view/admin/createTest.jsp";
 
 }

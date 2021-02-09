@@ -20,6 +20,7 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/UserDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCUserDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/IndexServlet.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/CreateTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/HomeCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/PassTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/DeleteTestCommand.java
@@ -62,4 +63,5 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/entity/Question.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/UserInfoDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/LangServlet.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/CreateTestDTO.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/UserService.java

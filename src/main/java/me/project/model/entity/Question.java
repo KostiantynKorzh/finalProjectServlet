@@ -9,6 +9,11 @@ public class Question {
     public Question() {
     }
 
+    public Question(Long testId, String questionText) {
+        this.testId = testId;
+        this.questionText = questionText;
+    }
+
     public Question(Long id, Long testId, String questionText) {
         this.id = id;
         this.testId = testId;

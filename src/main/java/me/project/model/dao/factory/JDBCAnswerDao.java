@@ -1,6 +1,7 @@
 package me.project.model.dao.factory;
 
 import me.project.model.dao.AnswerDao;
+import me.project.model.dto.CreateTestDTO;
 import me.project.model.entity.Answer;
 import me.project.model.entity.Question;
 
@@ -21,6 +22,26 @@ public class JDBCAnswerDao implements AnswerDao {
     @Override
     public void create(Answer entity) {
 
+    }
+
+    @Override
+    public void createAnswers(List<Answer> answers) {
+        String query = "INSERT " +
+                "INTO answers(question_id, answer_text, is_correct) " +
+                "values(?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            connection.setAutoCommit(false);
+            for (Answer answer : answers) {
+                preparedStatement.setLong(1, answer.getQuestionId());
+                preparedStatement.setString(2, answer.getAnswerText());
+                preparedStatement.setBoolean(3, answer.isCorrect());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

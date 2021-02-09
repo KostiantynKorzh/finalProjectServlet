@@ -21,7 +21,20 @@ public class JDBCTestDao implements TestDao {
 
     @Override
     public void create(Test entity) {
+        String query = "INSERT INTO " +
+                "tests(title, subject, difficulty, duration, created) " +
+                "values(?, ?, ?, ?, NOW());";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(2, entity.getSubject().name());
+            preparedStatement.setInt(3, entity.getDifficulty().ordinal());
+            preparedStatement.setInt(4, entity.getDuration());
+//            preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

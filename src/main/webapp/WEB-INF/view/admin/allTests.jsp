@@ -14,6 +14,11 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="container">
+
+    <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#createTestModal">Create Test
+    </button>
+
     <table class="table" id="table">
         <thead>
         <tr>
@@ -58,9 +63,9 @@
                        href="${pageContext.request.contextPath}/admin/tests/edit/${test.id}">
                     <fmt:message key="admin.allUsers.edit"/></a>
                 <th>
-                <a class="btn btn-danger"
-                   href="${pageContext.request.contextPath}/admin/tests/delete/${test.id}">
-                    <fmt:message key="admin.allUsers.delete"/></a>
+                    <a class="btn btn-danger"
+                       href="${pageContext.request.contextPath}/admin/tests/delete/${test.id}">
+                        <fmt:message key="admin.allUsers.delete"/></a>
                 </th>
             </tr>
         </c:forEach>
@@ -93,7 +98,73 @@
             </li>
         </ul>
     </nav>
-
 </div>
+
+
+<div class="modal fade" id="createTestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Test</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="${pageContext.request.contextPath}/admin/createTest">
+                    <div class="form-group has-error">
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="title">Title:</label>
+                                </div>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="subject">Subject:</label>
+                                </div>
+                                <select class="custom-select" id="subject" name="subject">
+                                    <option value="MATH" selected>MATH</option>
+                                    <option value="ENGLISH">ENGLISH</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="difficulty">Difficulty:</label>
+                                </div>
+                                <select class="custom-select" id="difficulty" name="difficulty">
+                                    <option value="EASY" selected>EASY</option>
+                                    <option value="MEDIUM">MEDIUM</option>
+                                    <option value="HARD">HARD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="duration">Duration:</label>
+                                </div>
+                                <input type="text" class="form-control" id="duration" name="duration"
+                                       required pattern="[0-9]+">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

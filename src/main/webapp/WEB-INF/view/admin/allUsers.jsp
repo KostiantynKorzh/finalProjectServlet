@@ -108,18 +108,20 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="${pageContext.request.contextPath}/admin/users/edit">
-                    <div class="mb-3">
-                        <label for="firstName" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="lastName" class="col-form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName">
-                    </div>
-                    <input hidden type="text" name="id" id="id"/>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="form-group has-error">
+                        <div class="mb-3">
+                            <label for="firstName" class="control-label">First Name:</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="col-form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName">
+                        </div>
+                        <input hidden type="text" name="id" id="id"/>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -127,14 +129,20 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#editModal').on('show.bs.modal', function (e) {
-            var id = $(e.relatedTarget).data('id');
-            $(e.currentTarget).find('input[name="id"]').val(id);
-        });
+<script type="text/javascript">
+    $('#editModal').on('submit', function (e) {
+        const firstName = $('#firstName');
+        if (!firstName.val()) {
+            e.preventDefault();
+        }
+        const lastName = $('#lastName');
+        if (!lastName.val()) {
+            e.preventDefault();
+        }
+
     });
 </script>
+
 
 </body>
 </html>

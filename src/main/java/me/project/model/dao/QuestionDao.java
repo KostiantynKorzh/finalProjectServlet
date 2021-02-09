@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface QuestionDao extends Dao<Question> {
     List<Question> findAllByTestId(Long testId);
+
+    void createQuestions(List<String> questionTexts);
+
+    Long findIdByQuestionText(String questionText);
 }

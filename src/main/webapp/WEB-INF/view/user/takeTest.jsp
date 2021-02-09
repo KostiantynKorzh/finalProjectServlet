@@ -53,10 +53,10 @@
             }]
         };
         const allQa = [];
-        for (let i = 0; i < formsCollection.length; i++) {
+        for (let i = 0; i < formsCollection.length ; i++) {
             // console.log((formsCollection.item(i).name));
-            for (let j = 0; j < formsCollection.item(i).length; j++) {
-                console.log(formsCollection.item(j).length)
+            for (let j = 0; j < formsCollection.item(i).length ; j++) {
+                console.log(formsCollection.item(i).length)
                 // console.log(formsCollection.item(i).elements.item(j).name);
                 // console.log(formsCollection.item(i).elements.item(j).checked);
                 answers.push({

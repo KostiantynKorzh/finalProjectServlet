@@ -17,7 +17,6 @@
         margin: 50px auto;
         font-size: 15px;
     }
-
     .login-form form {
         margin-bottom: 15px;
         background: #f7f7f7;
@@ -38,19 +37,23 @@
         <h2 class="text-center"><fmt:message key="signup.welcome" bundle="${b}"/></h2>
         <div class="form-group">
             <input type="text" class="form-control" name="firstName"
-                   placeholder="<fmt:message key="admin.allUsers.firstName" bundle="${b}"/>" required="required">
+                   placeholder="<fmt:message key="admin.allUsers.firstName" bundle="${b}"/>"
+                   required minlength="3" maxlength="25" pattern="[a-zA-Zа-яА-ЯҐЇХЄ'ЁЪЭІИиіґїхєёъхэ]+">
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="lastName"
-                   placeholder="<fmt:message key="admin.allUsers.lastName" bundle="${b}"/>" required="required">
+                   placeholder="<fmt:message key="admin.allUsers.lastName" bundle="${b}"/>"
+                   required minlength="3" maxlength="25" pattern="[a-zA-Zа-яА-ЯҐЇХЄ'ЁЪЭІИиіґїхєёъхэ]+">
         </div>
         <div class="form-group">
             <input type="email" class="form-control" name="email"
-                   placeholder="<fmt:message key="admin.allUsers.email" bundle="${b}"/>" required="required">
+                   placeholder="<fmt:message key="admin.allUsers.email" bundle="${b}"/>"
+                   required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password"
-                   placeholder="<fmt:message key="signup.password" bundle="${b}"/>" required="required">
+                   placeholder="<fmt:message key="signup.password" bundle="${b}"/>"
+                   required minlength="8" maxlength="25">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"><fmt:message key="login.signup" bundle="${b}"/></button>

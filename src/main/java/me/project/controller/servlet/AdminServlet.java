@@ -43,6 +43,8 @@ public class AdminServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         path = req.getRequestURI().replaceAll(".*/admin/", "");
 
+        System.out.println("(in admin) PATH: " + path);
+
         if (path.matches("users/delete/[0-9]+")) {
             commands.put(path, new DeleteUserCommand());
         }
@@ -54,6 +56,9 @@ public class AdminServlet extends HttpServlet {
         }
         if (path.matches("tests/edit/[0-9]+")) {
             commands.put(path, new EditTestCommand());
+        }
+        if (path.matches("createTest.*")) {
+            commands.put(path, new CreateTestCommand());
         }
 
         Command command = commands.getOrDefault(path,

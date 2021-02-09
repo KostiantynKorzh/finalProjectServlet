@@ -14,7 +14,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/home"><fmt:message key="common.header.home"/></a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/home"><fmt:message
+                key="common.header.home"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,16 +24,19 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <c:if test="${sessionScope.user!=null}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/profile"><fmt:message key="common.header.profile"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/profile"><fmt:message
+                                key="common.header.profile"/></a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page"
-                       href="${pageContext.request.contextPath}/admin/tests/?sorted=id&page=1"><fmt:message key="admin.header.tests"/></a>
+                       href="${pageContext.request.contextPath}/admin/tests/?sorted=id&page=1"><fmt:message
+                            key="admin.header.tests"/></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page"
-                       href="${pageContext.request.contextPath}/admin/users/?sorted=id&page=1"><fmt:message key="admin.header.users"/></a>
+                       href="${pageContext.request.contextPath}/admin/users/?sorted=id&page=1"><fmt:message
+                            key="admin.header.users"/></a>
                 </li>
             </ul>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -44,16 +48,15 @@
                             <fmt:message key="common.header.lang"/>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/lang/en">English</a>
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/lang/ua">Українська</a>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/lang/en">English</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/lang/ua">Українська</a>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <c:if test="${sessionScope.user!=null}">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/auth/logout"><fmt:message key="common.header.logout"/></a>
-                        </c:if>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/auth/logout"><fmt:message
+                                key="common.header.logout"/></a>
                     </li>
                 </ul>
             </div>

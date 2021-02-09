@@ -3,9 +3,12 @@ package me.project.model.service;
 import me.project.model.dao.*;
 import me.project.model.dao.factory.DaoFactory;
 import me.project.model.dto.CompleteTestDTO;
+import me.project.model.dto.CreateTestDTO;
 import me.project.model.dto.ResultDTO;
 import me.project.model.dto.TestDTO;
 import me.project.model.entity.*;
+import me.project.model.entity.enums.Difficulty;
+import me.project.model.entity.enums.Subject;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -51,6 +54,44 @@ public class TestService {
         List<Question> questions = questionDao.findAllByTestId(testId);
         List<Answer> answers = answerDao.findAllByTestId(testId);
         return new TestDTO(test, questions, answers);
+    }
+
+    public void createAnswers(List<CreateTestDTO> createdTest) {
+        List<Answer> answers = new ArrayList<>();
+        for (int i = 0; i < createdTest.size(); i++) {
+            for (int j = 0; j < createdTest.get(i).getAnswers().length; j++) {
+                answers.add(new Answer.Builder()
+                        .questionId(questionDao.findIdByQuestionText(createdTest.get(i).getQuestionText()))
+                        .answerText(createdTest.get(i).getAnswers()[j].getAnswerText())
+                        .isCorrect(createdTest.get(i).getAnswers()[j].isCorrect())
+                        .build());
+            }
+        }
+        answerDao.createAnswers(answers);
+    }
+
+    public void createQuestions(List<CreateTestDTO> createdTest) {
+        List<String> questions = new ArrayList<>();
+        for (int i = 0; i < createdTest.size(); i++) {
+            questions.add(createdTest.get(i).getQuestionText());
+        }
+        questionDao.createQuestions(questions);
+    }
+
+    public void createTest(List<CreateTestDTO> createdTest) {
+        Test test = new Test.Builder()
+                .title(createdTest.get(0).getTestTitle())
+                .subject(Subject.valueOf(createdTest.get(0).getTestSubject()))
+                .difficulty(Difficulty.valueOf(createdTest.get(0).getTestDifficulty()))
+                .duration(createdTest.get(0).getTestDuration())
+                .build();
+        testDao.create(test);
+    }
+
+    public void createFullTestWithQuestionsAndAnswers(List<CreateTestDTO> createdTest) {
+        createTest(createdTest);
+        createQuestions(createdTest);
+        createAnswers(createdTest);
     }
 
     public void checkCompletedTestAndCreateResult(Long userId, Long testId, List<CompleteTestDTO> completeTests) {

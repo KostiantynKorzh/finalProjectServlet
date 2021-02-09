@@ -52,6 +52,42 @@ public class JDBCQuestionDao implements QuestionDao {
     }
 
     @Override
+    public Long findIdByQuestionText(String questionText) {
+        Long id = (long) -1;
+        String query = "SELECT id " +
+                "FROM questions " +
+                "WHERE question_text = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, questionText);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                id = rs.getLong(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    @Override
+    public void createQuestions(List<String> questionTexts) {
+        String query = "INSERT " +
+                "INTO questions(test_id, question_text) " +
+                "values((select MAX(id) FROM tests), ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            connection.setAutoCommit(false);
+            for (String question : questionTexts) {
+                preparedStatement.setString(1, question);
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Question> findAll() {
         return null;
     }

@@ -39,6 +39,7 @@ me/project/controller/command/commands_admin/EditTestCommand.class
 me/project/controller/servlet/AdminServlet.class
 me/project/model/service/UserService.class
 me/project/model/dao/factory/JDBCRequiredTestDao.class
+me/project/controller/command/commands_admin/CreateTestCommand$1.class
 me/project/model/service/AuthService.class
 me/project/controller/command/Command.class
 me/project/controller/servlet/LangServlet.class
@@ -47,6 +48,7 @@ me/project/model/dao/Dao.class
 me/project/model/dao/UserDao.class
 me/project/model/dao/factory/JDBCQuestionDao.class
 me/project/model/dao/factory/JDBCTestDao.class
+me/project/controller/command/commands_admin/CreateTestCommand.class
 me/project/controller/filter/AuthFilter.class
 me/project/controller/filter/LangFilter.class
 me/project/controller/command/commands_admin/EditUserCommand.class
@@ -59,8 +61,10 @@ me/project/model/dao/factory/DaoFactory.class
 me/project/model/util/DBConnection.class
 me/project/model/entity/Test$Builder.class
 me/project/controller/servlet/UserServlet.class
+me/project/model/dto/CreateTestDTO$Answer.class
 me/project/model/dao/factory/JDBCResultDao.class
 me/project/controller/filter/AdminFilter.class
+me/project/model/dto/CreateTestDTO.class
 me/project/model/dao/RoleDao.class
 me/project/model/service/TestService.class
 me/project/controller/command/commands_admin/AddTestsToUserCommand.class
