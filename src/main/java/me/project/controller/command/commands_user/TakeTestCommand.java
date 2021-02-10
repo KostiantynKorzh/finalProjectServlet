@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TakeTestCommand implements Command {
-    TestService testService = TestService.getInstance();
+    private TestService testService = TestService.getInstance();
     private final ObjectMapper jsonMapper = new ObjectMapper();
 
     @Override

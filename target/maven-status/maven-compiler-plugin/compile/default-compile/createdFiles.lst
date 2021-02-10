@@ -15,11 +15,11 @@ me/project/model/entity/RequiredTest.class
 me/project/model/dto/CompleteTestDTO.class
 me/project/controller/command/commands_user/TakeTestCommand$1.class
 me/project/controller/command/commands_user/RequiredTestsCommand.class
+me/project/model/service/ResultService.class
 me/project/controller/View.class
 me/project/controller/command/commands_user/PassTestCommand.class
 me/project/model/entity/Question.class
 me/project/controller/command/commands_auth/LogoutCommand.class
-me/project/controller/servlet/IndexServlet.class
 me/project/controller/filter/EncodingFilter.class
 me/project/controller/command/commands_user/ProfileCommand.class
 me/project/model/dto/UserInfoDTO.class
@@ -35,7 +35,6 @@ me/project/model/dao/ResultDao.class
 me/project/controller/command/util/Validation.class
 me/project/model/dto/ResultDTO.class
 me/project/model/dto/UserDTO.class
-me/project/controller/command/commands_admin/EditTestCommand.class
 me/project/controller/servlet/AdminServlet.class
 me/project/model/service/UserService.class
 me/project/model/dao/factory/JDBCRequiredTestDao.class
@@ -59,6 +58,7 @@ me/project/model/entity/Answer.class
 me/project/model/entity/enums/Difficulty.class
 me/project/model/dao/factory/DaoFactory.class
 me/project/model/util/DBConnection.class
+me/project/controller/command/util/PaginationAndSorting.class
 me/project/model/entity/Test$Builder.class
 me/project/controller/servlet/UserServlet.class
 me/project/model/dto/CreateTestDTO$Answer.class

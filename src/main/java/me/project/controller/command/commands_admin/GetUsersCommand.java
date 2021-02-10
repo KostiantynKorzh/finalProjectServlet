@@ -2,6 +2,7 @@ package me.project.controller.command.commands_admin;
 
 import me.project.controller.View;
 import me.project.controller.command.Command;
+import me.project.controller.command.util.PaginationAndSorting;
 import me.project.model.entity.User;
 import me.project.model.service.UserService;
 
@@ -18,29 +19,15 @@ public class GetUsersCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int perPage = 2;
-        String parameter = "id";
-        int page = 1;
-        int pages = 1;
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        if (request.getParameter("sorted") != null) {
-            parameter = request.getParameter("sorted");
-        }
-        pages = (int) Math.ceil(userService.getUsers().size() * 1.0 / perPage);
-        request.setAttribute("pages", pages);
-        if (page <= 1) {
-            page = 1;
-        }
-        if (page > pages - 1) {
-            page = pages;
-        }
-        request.setAttribute("page", page);
-        request.setAttribute("parameter", parameter);
-        List<User> users;
 
-        users = userService.getUsersSortedByAndPaginated(parameter, page - 1, perPage);
+        int numberOfRows = userService.getUsers().size();
+
+        PaginationAndSorting.configurePageAndParameter(request, numberOfRows);
+
+        List<User> users = userService.getUsersSortedByAndPaginated(
+                PaginationAndSorting.getParameter(),
+                PaginationAndSorting.getPage() - 1,
+                PaginationAndSorting.PER_PAGE);
         request.setAttribute("users", users);
         return View.ALL_USERS_PAGE;
     }

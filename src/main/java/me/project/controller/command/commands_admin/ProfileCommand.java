@@ -13,13 +13,11 @@ import javax.servlet.http.HttpSession;
 
 public class ProfileCommand implements Command {
 
-    UserService userService;
-    TestService testService;
+    UserService userService = new UserService();
+    TestService testService = TestService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
-        userService = new UserService();
-        testService = TestService.getInstance();
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");
         request.setAttribute("overallTests", testService.getTests().size());

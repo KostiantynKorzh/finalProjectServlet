@@ -15,14 +15,16 @@ import java.text.NumberFormat;
 
 public class ProfileCommand implements Command {
 
-    private TestService testService;
-    private UserService userService;
+    private final TestService testService = TestService.getInstance();
+    private final UserService userService;
+
+    public ProfileCommand(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
 
-        userService = new UserService();
-        testService = TestService.getInstance();
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");
         request.setAttribute("overall", testService.getPassedTestsCount(user.getId()));

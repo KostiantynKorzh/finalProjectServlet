@@ -22,7 +22,7 @@ public class AuthServlet extends HttpServlet {
     Map<String, Command> commands = new HashMap<>();
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         commands.put("login", new LoginCommand());
         commands.put("signup", new SignupCommand());
         commands.put("logout", new LogoutCommand());
@@ -40,9 +40,11 @@ public class AuthServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getRequestURI().replaceAll(".*/auth/", "");
+
         Command command = commands.getOrDefault(path,
                 (r) -> View.LOGIN_PAGE);
         String page = command.execute(req);
+
         if (page.contains("redirect:")) {
             resp.sendRedirect(page.replace("redirect:", ""));
         } else {

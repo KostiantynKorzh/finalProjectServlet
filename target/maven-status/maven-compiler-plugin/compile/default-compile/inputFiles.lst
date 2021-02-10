@@ -2,6 +2,7 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/HomeCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/AuthFilter.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/AuthServlet.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/ResultService.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/TakeTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/GetTestsCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/RequiredTestDao.java
@@ -19,7 +20,6 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/service/TestService.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/UserDao.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCUserDao.java
-/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/IndexServlet.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/CreateTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/HomeCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/PassTestCommand.java
@@ -28,7 +28,6 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/PassedTestsCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/filter/EncodingFilter.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/AdminServlet.java
-/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/EditTestCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/GetUsersCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/servlet/UserServlet.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCAnswerDao.java
@@ -36,6 +35,7 @@
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/DaoFactory.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dao/factory/JDBCDaoFactory.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/AddTestsToUserCommand.java
+/Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/util/PaginationAndSorting.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_admin/ProfileCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/controller/command/commands_user/RequiredTestsCommand.java
 /Users/kampuxter/Desktop/EPAM/JAVA/Project/ServletProject/src/main/java/me/project/model/dto/ResultDTO.java

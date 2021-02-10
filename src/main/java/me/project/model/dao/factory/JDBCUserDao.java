@@ -29,7 +29,7 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.setString(4, entity.getPassword());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e);
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryRole)) {
             preparedStatement.setInt(1, entity.getRole().ordinal() + 1);

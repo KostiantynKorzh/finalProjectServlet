@@ -3,6 +3,8 @@ package me.project.controller.servlet;
 import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.controller.command.commands_user.*;
+import me.project.model.service.TestService;
+import me.project.model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,14 +18,25 @@ import java.util.Map;
 @WebServlet("/user/*")
 public class UserServlet extends HttpServlet {
 
-    Map<String, Command> commands = new HashMap<>();
+    private Map<String, Command> commands = new HashMap<>();
+
+    private Command passTestCommand;
+    private Command takeTestCommand;
+
+    private UserService userService;
+
 
     @Override
     public void init() {
+
+        userService = new UserService();
+
         commands.put("home", new HomeCommand());
         commands.put("requiredTests/", new RequiredTestsCommand());
         commands.put("passedTests/", new PassedTestsCommand());
-        commands.put("profile", new ProfileCommand());
+        commands.put("profile", new ProfileCommand(userService));
+        passTestCommand = new PassTestCommand();
+        takeTestCommand = new TakeTestCommand();
     }
 
     @Override
@@ -39,24 +52,28 @@ public class UserServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getRequestURI().replaceAll(".*/user/", "");
 
-        System.out.println("PATH = " + path);
-
-        if (path.matches("requiredTests/pass/[0-9]+.*")) {
-            commands.put(path, new PassTestCommand());
-        }
-        if (path.matches("requiredTests/take/[0-9]+.*")) {
-            commands.put(path, new TakeTestCommand());
-        }
+        initWithRegex(path);
 
         Command command = commands.getOrDefault(path,
                 (r) -> View.HOME_PAGE_USER);
         String page = command.execute(req);
-        System.out.println("PAGE " + page);
         if (page.contains("redirect:")) {
             resp.sendRedirect(page.replace("redirect:", ""));
         } else {
-            System.out.println("dispatcher");
             req.getRequestDispatcher(page).forward(req, resp);
+        }
+    }
+
+    private void initWithRegex(String path) {
+        if (path.matches("requiredTests/pass/[0-9]+.*")) {
+            if (!commands.containsKey(path)) {
+                commands.put(path, passTestCommand);
+            }
+        }
+        if (path.matches("requiredTests/take/[0-9]+.*")) {
+            if (!commands.containsKey(path)) {
+                commands.put(path, takeTestCommand);
+            }
         }
     }
 

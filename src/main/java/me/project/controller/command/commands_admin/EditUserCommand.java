@@ -9,16 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 
 public class EditUserCommand implements Command {
 
-    UserService userService;
+    UserService userService= new UserService();;
 
     @Override
     public String execute(HttpServletRequest request) {
-        userService = new UserService();
         Long id = Long.valueOf(request.getParameter("id"));
         User user = userService.getUserById(id);
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
-        userService.updateUser(user);
+
+        updateUserName(user, request.getParameter("firstName"),request.getParameter("lastName"));
+
         return "redirect:" + request.getHeader("Referer");
     }
+
+    private void updateUserName(User user, String firstName, String lastName){
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userService.updateUser(user);
+    }
+
 }
