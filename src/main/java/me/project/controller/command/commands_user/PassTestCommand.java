@@ -17,7 +17,11 @@ public class PassTestCommand implements Command {
         HttpSession session = request.getSession();
         Long userId = ((UserDTO) session.getAttribute("user")).getId();
         Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/pass/", ""));
-        testService.passTest(userId, testId);
+        try {
+            testService.passTest(userId, testId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return "redirect:" + request.getHeader("Referer");
     }

@@ -25,7 +25,11 @@ public class AddTestsToUserCommand implements Command {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")
                     .replaceAll("/add/.*", ""));
             Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/add/", ""));
-            testService.makeTestsRequired(userId, testId);
+            try {
+                testService.makeTestsRequired(userId, testId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return "redirect:/admin/users/addTests/" + userId;
         } else if (request.getRequestURI().contains("/remove/")) {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")

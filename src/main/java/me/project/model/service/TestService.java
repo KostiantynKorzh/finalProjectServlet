@@ -31,7 +31,7 @@ public class TestService {
     private TestService() {
     }
 
-    public void passTest(Long userId, Long testId) {
+    public void passTest(Long userId, Long testId) throws Exception {
         User user = userDao.findById(userId);
         Test test = testDao.findById(testId);
         resultDao.create(createResultObject(userId, test, new Random().nextInt(100)));
@@ -78,7 +78,7 @@ public class TestService {
         questionDao.createQuestions(questions);
     }
 
-    public void createTest(List<CreateTestDTO> createdTest) {
+    public void createTest(List<CreateTestDTO> createdTest) throws Exception {
         Test test = new Test.Builder()
                 .title(createdTest.get(0).getTestTitle())
                 .subject(Subject.valueOf(createdTest.get(0).getTestSubject()))
@@ -88,13 +88,13 @@ public class TestService {
         testDao.create(test);
     }
 
-    public void createFullTestWithQuestionsAndAnswers(List<CreateTestDTO> createdTest) {
+    public void createFullTestWithQuestionsAndAnswers(List<CreateTestDTO> createdTest) throws Exception {
         createTest(createdTest);
         createQuestions(createdTest);
         createAnswers(createdTest);
     }
 
-    public void checkCompletedTestAndCreateResult(Long userId, Long testId, List<CompleteTestDTO> completeTests) {
+    public void checkCompletedTestAndCreateResult(Long userId, Long testId, List<CompleteTestDTO> completeTests) throws Exception {
         TestDTO testDTO = getTestWithQuestionsAndAnswersByTestId(testId);
         int correctAnswers = 0;
         for (Question question : testDTO.getQuestions()) {
@@ -147,7 +147,7 @@ public class TestService {
         requiredTestDao.close();
     }
 
-    public void makeTestsRequired(Long userId, Long testId) {
+    public void makeTestsRequired(Long userId, Long testId) throws Exception {
         User user = userDao.findById(userId);
         Test test = testDao.findById(testId);
         requiredTestDao.create(new RequiredTest(user, test));

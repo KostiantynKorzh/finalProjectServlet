@@ -32,7 +32,7 @@ public class CreateTestCommand implements Command {
                 System.out.println(tests);
 
                 testService.createFullTestWithQuestionsAndAnswers(tests);
-            } catch (IOException e) {
+            }  catch (Exception e) {
                 e.printStackTrace();
             }
             return "redirect:/admin/tests";

@@ -37,7 +37,7 @@ public class AuthService {
         return false;
     }
 
-    public boolean signup(String firstName, String lastName, String login, String password) {
+    public void signup(String firstName, String lastName, String login, String password) throws Exception {
         try (UserDao userDao = daoFactory.createUserFactory()) {
             User user = new User.Builder()
                     .firstName(firstName)
@@ -47,9 +47,9 @@ public class AuthService {
                     .role(Role.USER)
                     .build();
             userDao.create(user);
-            return true;
         } catch (Exception e) {
-            return false;
+//            LOGGER.error("Can't create user in db");
+            throw new Exception(e);
         }
     }
 

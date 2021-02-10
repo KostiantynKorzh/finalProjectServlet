@@ -25,7 +25,9 @@ public class SignupCommand implements Command {
                 authService = new AuthService();
                 authService.signup(firstName, lastName, email, password);
             } catch (Exception e) {
-                e.printStackTrace();
+//                LOGGER.error("Can't create user");
+                request.setAttribute("message", "User with such email is already exists");
+                return View.SIGNUP_PAGE;
             }
             return "redirect:/auth/login";
         }

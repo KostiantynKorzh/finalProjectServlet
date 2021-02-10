@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements Command {
 
+//    static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
+
     AuthService authService;
 
     @Override
@@ -22,9 +24,11 @@ public class LoginCommand implements Command {
             if (authService.login(login, password, request)) {
                 HttpSession session = request.getSession();
                 UserDTO user = (UserDTO) session.getAttribute("user");
+//                LOGGER.info("Successfully logged in " + user.getLogin());
                 return user.getRole().getName().equals("ADMIN") ? "redirect:/admin/home" : "redirect:/user/home";
-
             }
+//            LOGGER.error("BAD CREDENTIALS");
+            request.setAttribute("message", "BAD CREDENTIALS");
         }
         return View.LOGIN_PAGE;
 

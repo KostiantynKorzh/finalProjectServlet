@@ -17,7 +17,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void create(User entity) {
+    public void create(User entity) throws Exception {
 
         String queryUser = "INSERT INTO users (first_name, last_name, email, password, created) values (?, ?, ?, ?, NOW());";
         String queryRole = "INSERT INTO user_roles (user_id, role_id) values ((select MAX(id) FROM users), ?);";
@@ -35,7 +35,7 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.setInt(1, entity.getRole().ordinal() + 1);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e);
         }
     }
 

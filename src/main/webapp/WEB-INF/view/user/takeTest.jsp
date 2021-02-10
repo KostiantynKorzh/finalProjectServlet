@@ -37,8 +37,12 @@
         </ul>
     </c:forEach>
 
-    <input type="submit" value="Submit answers" onclick="submitAnswers()"/>
+    <input type="submit" class="btn btn-success m-5" value="Submit answers" onclick="submitAnswers()"/>
 
+</div>
+
+<div class="progress fixed-bottom">
+    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
 <script type="text/javascript">
@@ -53,12 +57,9 @@
             }]
         };
         const allQa = [];
-        for (let i = 0; i < formsCollection.length ; i++) {
-            // console.log((formsCollection.item(i).name));
-            for (let j = 0; j < formsCollection.item(i).length ; j++) {
+        for (let i = 0; i < formsCollection.length; i++) {
+            for (let j = 0; j < formsCollection.item(i).length; j++) {
                 console.log(formsCollection.item(i).length)
-                // console.log(formsCollection.item(i).elements.item(j).name);
-                // console.log(formsCollection.item(i).elements.item(j).checked);
                 answers.push({
                     answerId: formsCollection.item(i).elements.item(j).name,
                     isChecked: formsCollection.item(i).elements.item(j).checked
@@ -83,6 +84,25 @@
         });
         window.location.replace("http://localhost:8080/user/home");
     }
+
+    let deadline = ${sessionScope.deadline};
+    let duration =${requestScope.test.test.duration}*1000;
+
+    window.addEventListener("beforeunload", function (e) {
+        submitAnswers();
+    });
+
+    $(function(){
+        setInterval(function(){
+            let percentage = (deadline - Date.now()) / duration * 100;
+            if(percentage<0){
+                submitAnswers();
+            }
+            $(".progress-bar").css("width", percentage + "%");
+        }, 1000);
+    });
+
+
 
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

@@ -13,7 +13,6 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-ADMIN HOME
 
 
 </body>

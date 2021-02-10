@@ -54,7 +54,7 @@
                        href="${pageContext.request.contextPath}/admin/users/addTests/${user.id}">
                     <fmt:message key="admin.allUsers.addTests"/></a></th>
                 <th>
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn btn-primary editBtn"
                             data-toggle="modal" data-target="#editModal" data-id="${user.id}">
                         <fmt:message key="admin.allUsers.edit"/>
                     </button>
@@ -117,7 +117,7 @@
                             <label for="lastName" class="col-form-label">Last Name:</label>
                             <input type="text" class="form-control" id="lastName" name="lastName">
                         </div>
-                        <input hidden type="text" name="id" id="id"/>
+                        <input hidden type="text" name="id" id="hiddenId"/>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -130,6 +130,13 @@
 </div>
 
 <script type="text/javascript">
+
+    $('.editBtn').click(function () {
+        let id = $(this).data('id');
+        $('#editModal #hiddenId').val(id);
+
+    });
+
     $('#editModal').on('submit', function (e) {
         const firstName = $('#firstName');
         if (!firstName.val()) {
