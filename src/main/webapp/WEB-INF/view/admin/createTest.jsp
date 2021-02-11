@@ -27,9 +27,9 @@
         <div class="card-body" id="textCard">
             <%--            <span><button class="btn btn-success" id="addNewAnswerBtn-1">+</button></span>--%>
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <button id="deleteQuestionBtn" class="btn btn-danger">-</button>
-                </div>
+                <%--                <div class="input-group-prepend">--%>
+                <%--                    <button id="deleteQuestionBtn" class="btn btn-danger">-</button>--%>
+                <%--                </div>--%>
                 <textarea class="form-control" style="background-color: lightblue; border: solid coral 3px"
                           aria-label="With textarea" placeholder="Your Question"></textarea>
                 <div class="input-group-append">
@@ -47,9 +47,9 @@
                                 </span>
                         </div>
                         <textarea class="form-control" aria-label="With textarea"></textarea>
-                        <div class="input-group-append">
-                            <button class="btn btn-danger deleteAnswerBtn" type="button">-</button>
-                        </div>
+                        <%--                        <div class="input-group-append">--%>
+                        <%--                            <button class="btn btn-danger deleteAnswerBtn" type="button">-</button>--%>
+                        <%--                        </div>--%>
                     </div>
                 </li>
             </form>
@@ -70,9 +70,9 @@
         $("#qaBlock").append(
             '<div id="qaBlock">' +
             '<div class="input-group">' +
-            '<div class="input-group-prepend">' +
-            deleteBtn +
-            '</div>' +
+            // '<div class="input-group-prepend">' +
+            // deleteBtn +
+            // '</div>' +
             '<textarea class="form-control" style="background-color: lightblue; border: solid coral 3px"' +
             'aria-label="With textarea" placeholder="Your Question"></textarea>' +
             '<div class="input-group-append">' +
@@ -89,9 +89,9 @@
             '</span>' +
             '</div>' +
             '<textarea class="form-control" aria-label="With textarea"></textarea>' +
-            '<div class="input-group-append">' +
-            '<button class="btn btn-danger deleteAnswerBtn" type="button" >-</button>' +
-            '</div>' +
+            // '<div class="input-group-append">' +
+            // '<button class="btn btn-danger deleteAnswerBtn" type="button" >-</button>' +
+            // '</div>' +
             '</div>' +
             '</li>' +
             '</form>' +
@@ -113,9 +113,9 @@
             '</span>' +
             '</div>' +
             '<textarea class="form-control" aria-label="With textarea"/>' +
-            '<div class="input-group-append">' +
-            '<button class="btn btn-danger deleteAnswerBtn" type="button">-</button>' +
-            '</div>' +
+            // '<div class="input-group-append">' +
+            // '<button class="btn btn-danger deleteAnswerBtn" type="button">-</button>' +
+            // '</div>' +
             '</div>' +
             '</li>');
     }
@@ -124,19 +124,18 @@
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
     }
 
+
     $(document).ready(function () {
 
         $('#addBtn').click(function () {
+            $(".addNewAnswerBtn").attr('disabled','disabled');
             addNewQuestion();
             $(".addNewAnswerBtn").on('click', addNewAnswer);
             $(".deleteAnswerBtn").on('click', deleteAnswer);
         });
 
-
         $('.addNewAnswerBtn').click(function () {
             addNewAnswer();
-            $(".addNewAnswerBtn").on('click', addNewAnswer);
-            $(".deleteAnswerBtn").on('click', deleteAnswer);
         });
 
         $('.deleteAnswerBtn').click(deleteAnswer);
@@ -161,25 +160,25 @@
         const allQa = [];
 
         // 3 is number of elements in qa block: checkbox, text area, button
-            for (let i = 0; i < formsCollection.length; i++) {
-                for (let j = 0; j < formsCollection.item(i).length / 3; j++) {
+        for (let i = 0; i < formsCollection.length; i++) {
+            for (let j = 0; j < formsCollection.item(i).length / 3; j++) {
 
-                    answers.push({
-                        answerText: formsCollection.item(i).elements.item(1 + 3 * j).value,
-                        isCorrect: formsCollection.item(i).elements.item(3 * j).checked
-                    });
-                }
-                qa = {
-                    testTitle: '${requestScope.title}',
-                    testSubject: '${requestScope.subject}',
-                    testDifficulty: '${requestScope.difficulty}',
-                    testDuration: '${requestScope.duration}',
+                answers.push({
+                    answerText: formsCollection.item(i).elements.item(1 + 3 * j).value,
+                    isCorrect: formsCollection.item(i).elements.item(3 * j).checked
+                });
+            }
+            qa = {
+                testTitle: '${requestScope.title}',
+                testSubject: '${requestScope.subject}',
+                testDifficulty: '${requestScope.difficulty}',
+                testDuration: '${requestScope.duration}',
 
-                    questionText: formsCollection.item(i).parentNode.parentNode.children.item(0).getElementsByClassName('form-control').item(0).value,
-                    answers: answers
-                }
-                allQa.push(qa);
-                answers = [];
+                questionText: formsCollection.item(i).parentNode.parentNode.children.item(0).getElementsByClassName('form-control').item(0).value,
+                answers: answers
+            }
+            allQa.push(qa);
+            answers = [];
         }
 
         console.log(allQa)

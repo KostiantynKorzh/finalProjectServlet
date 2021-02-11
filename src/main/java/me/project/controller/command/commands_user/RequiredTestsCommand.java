@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RequiredTestsCommand implements Command {
 
-    private TestService testService = TestService.getInstance();
+    private final TestService testService = TestService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

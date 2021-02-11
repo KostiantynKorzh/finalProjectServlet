@@ -6,6 +6,7 @@ import me.project.model.entity.User;
 import me.project.model.entity.enums.Difficulty;
 import me.project.model.entity.enums.Role;
 import me.project.model.entity.enums.Subject;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.List;
 
 public class JDBCTestDao implements TestDao {
 
-    private Connection connection;
+    static final Logger LOGGER = Logger.getLogger(JDBCResultDao.class);
+
+    private final Connection connection;
 
     public JDBCTestDao(Connection connection) {
         this.connection = connection;
@@ -29,7 +32,6 @@ public class JDBCTestDao implements TestDao {
             preparedStatement.setString(2, entity.getSubject().name());
             preparedStatement.setInt(3, entity.getDifficulty().ordinal());
             preparedStatement.setInt(4, entity.getDuration());
-//            preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -141,8 +143,9 @@ public class JDBCTestDao implements TestDao {
                 sortedAndPaginatedTests.add(test);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("");
         }
+        LOGGER.info("findAllByUserIdSortedByAndPaginated connection is closed");
         return sortedAndPaginatedTests;
     }
 
@@ -155,6 +158,7 @@ public class JDBCTestDao implements TestDao {
                 "LIMIT " + perPage + " " +
                 "OFFSET " + page * perPage;
         try (Statement statement = connection.prepareStatement(query)) {
+            LOGGER.info("findAllSortedByAndPaginated connection is open");
             ResultSet resultSet = statement.executeQuery(query);
             Test test;
             while (resultSet.next()) {
@@ -172,6 +176,7 @@ public class JDBCTestDao implements TestDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LOGGER.info("findAllSortedByAndPaginated connection is closed");
         return sortedAndPaginatedTests;
     }
 

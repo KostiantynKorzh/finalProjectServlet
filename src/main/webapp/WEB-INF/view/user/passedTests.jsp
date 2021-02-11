@@ -42,6 +42,11 @@
                     <fmt:message key="user.passedTests.result"/>
                 </a>
             </th>
+            <th scope="col">
+                <a href="${pageContext.request.contextPath}/user/passedTests/?sorted=passTimestamp&page=${requestScope.page}">
+                    <fmt:message key="user.passedTests.passed"/>
+                </a>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -52,6 +57,8 @@
                 <th><c:out value="${test.test.difficulty}"/></th>
                 <th><c:out value="${test.test.duration}"/></th>
                 <th><c:out value="${test.score}"/></th>
+                <th><c:out
+                        value="${test.passTimestamp.toString().substring(0,test.passTimestamp.toString().length()-5)}"/></th>
             </tr>
         </c:forEach>
         </tbody>

@@ -16,7 +16,7 @@
 <div class="container">
 
     <button type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#createTestModal">Create Test
+            data-toggle="modal" data-target="#createTestModal"><fmt:message key="admin.allTests.createTest"/>
     </button>
 
     <table class="table" id="table">
@@ -48,7 +48,6 @@
                 </a>
             </th>
             <th scope="col"></th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -59,9 +58,6 @@
                 <th><c:out value="${test.subject}"/></th>
                 <th><c:out value="${test.difficulty}"/></th>
                 <th><c:out value="${test.duration}"/></th>
-                <th><a class="btn btn-primary"
-                       href="${pageContext.request.contextPath}/admin/tests/edit/${test.id}">
-                    <fmt:message key="admin.allUsers.edit"/></a>
                 <th>
                     <a class="btn btn-danger"
                        href="${pageContext.request.contextPath}/admin/tests/delete/${test.id}">
@@ -106,7 +102,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create New Test</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -117,7 +112,8 @@
                         <div class="mb-3">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="title">Title:</label>
+                                    <label class="input-group-text" for="title"><fmt:message
+                                            key="admin.allTests.title"/></label>
                                 </div>
                                 <input type="text" class="form-control" id="title" name="title"
                                        required>
@@ -126,7 +122,8 @@
                         <div class="mb-3">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="subject">Subject:</label>
+                                    <label class="input-group-text" for="subject"><fmt:message
+                                            key="admin.allTests.subject"/></label>
                                 </div>
                                 <select class="custom-select" id="subject" name="subject">
                                     <option value="MATH" selected>MATH</option>
@@ -137,7 +134,8 @@
                         <div class="mb-3">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="difficulty">Difficulty:</label>
+                                    <label class="input-group-text" for="difficulty"><fmt:message
+                                            key="admin.allTests.difficulty"/></label>
                                 </div>
                                 <select class="custom-select" id="difficulty" name="difficulty">
                                     <option value="EASY" selected>EASY</option>
@@ -149,15 +147,18 @@
                         <div class="mb-3">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="duration">Duration:</label>
+                                    <label class="input-group-text" for="duration"><fmt:message
+                                            key="admin.allTests.duration"/></label>
                                 </div>
                                 <input type="text" class="form-control" id="duration" name="duration"
                                        required pattern="[0-9]+">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id=""><fmt:message
+                                    key="admin.allTests.createModal.save"/></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message
+                                    key="admin.allTests.createModal.cancel"/></button>
                         </div>
                     </div>
                 </form>

@@ -4,8 +4,10 @@ import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.model.dto.ResultDTO;
 import me.project.model.dto.UserDTO;
+import me.project.model.entity.Result;
 import me.project.model.entity.Test;
 import me.project.model.entity.User;
+import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 import me.project.model.service.UserService;
 
@@ -15,7 +17,13 @@ import java.util.List;
 public class AddTestsToUserCommand implements Command {
 
     TestService testService = TestService.getInstance();
-    UserService userService;
+    private final UserService userService;
+    private final ResultService resultService;
+
+    public AddTestsToUserCommand(UserService userService, ResultService resultService) {
+        this.userService = userService;
+        this.resultService = resultService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -24,12 +32,9 @@ public class AddTestsToUserCommand implements Command {
         if (request.getRequestURI().contains("/add/")) {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")
                     .replaceAll("/add/.*", ""));
-            Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/add/", ""));
-            try {
-                testService.makeTestsRequired(userId, testId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+            addTestToRequired(request, userId);
+
             return "redirect:/admin/users/addTests/" + userId;
         } else if (request.getRequestURI().contains("/remove/")) {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", "")
@@ -39,18 +44,36 @@ public class AddTestsToUserCommand implements Command {
             return "redirect:/admin/users/addTests/" + userId;
         } else {
             userId = Long.valueOf(request.getRequestURI().replaceAll(".*/addTests/", ""));
-            List<Test> availableTests = testService.getAvailableTests(userId);
-            request.setAttribute("availableTests", availableTests);
-            List<Test> requiredTests = testService.getRequiredTests(userId);
-            request.setAttribute("requiredTests", requiredTests);
-            List<ResultDTO> passedTests = testService.getResults(userId);
-            request.setAttribute("passedTests", passedTests);
-            userService = new UserService();
-            User user = userService.getUserById(userId);
-            request.setAttribute("userToAdd",
-                    user.getFirstName() + " " + user.getLastName());
-            request.setAttribute("userId", userId);
+
+            getUserTests(request, userId);
+
             return View.ADD_TESTS_TO_USER_PAGE;
         }
     }
+
+    private void getUserTests(HttpServletRequest request, Long userId) {
+        List<Test> availableTests = testService.getAvailableTests(userId);
+        request.setAttribute("availableTests", availableTests);
+
+        List<Test> requiredTests = testService.getRequiredTests(userId);
+        request.setAttribute("requiredTests", requiredTests);
+        List<Result> passedTests = resultService.getResults(userId);
+
+        request.setAttribute("passedTests", passedTests);
+        User user = userService.getUserById(userId);
+
+        request.setAttribute("userToAdd",
+                user.getFirstName() + " " + user.getLastName());
+        request.setAttribute("userId", userId);
+    }
+
+    private void addTestToRequired(HttpServletRequest request, Long userId) {
+        Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/add/", ""));
+        try {
+            testService.makeTestsRequired(userId, testId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

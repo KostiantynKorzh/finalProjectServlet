@@ -22,11 +22,9 @@ public class LangServlet extends HttpServlet {
 
         String lang = req.getRequestURI().replaceAll(".*lang/", "");
 
-        if (lang.equals("ua")) {
-            session.setAttribute("lang", "ua");
-        } else if (lang.equals("en")) {
-            session.setAttribute("lang", "en");
-        }
+
+        String newLang = lang.equals("ua") ? "ua" : "en";
+        session.setAttribute("lang", newLang);
 
         String url = req.getHeader("Referer");
         resp.sendRedirect(req.getContextPath() + url);

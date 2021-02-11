@@ -23,6 +23,31 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>me.project.controller.servlet.ErrorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type >
+        <location>/error</location>
+    </error-page>
+
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>src/main/java/resources/mes</param-value>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PaginationAndSorting {
 
-    public static final Integer PER_PAGE = 2;
+    public static final Integer PER_PAGE = 4;
 
     private static int page = 1;
     private static String parameter = "id";

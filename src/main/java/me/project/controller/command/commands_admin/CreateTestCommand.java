@@ -22,15 +22,10 @@ public class CreateTestCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
-        System.out.println("Get to command");
-
         if (request.getRequestURI().contains("/complete")) {
-            System.out.println("/complete");
             List<CreateTestDTO> tests;
             try {
                 tests = getCreatedTestFromJSONRequest(request);
-                System.out.println(tests);
-
                 testService.createFullTestWithQuestionsAndAnswers(tests);
             }  catch (Exception e) {
                 e.printStackTrace();

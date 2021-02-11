@@ -143,17 +143,7 @@ public class JDBCUserDao implements UserDao {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             User user;
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-//            for (int i = 1; i <= columnsNumber; i++) {
-//                System.out.print(rsmd.getColumnLabel(i) + ", ");
-//            }
-//            System.out.println();
             while (resultSet.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    System.out.print(resultSet.getString(i) + ", ");
-                }
-                System.out.println();
                 user = new User.Builder()
                         .id(resultSet.getLong("id"))
                         .firstName(resultSet.getString("first_name"))
@@ -205,7 +195,6 @@ public class JDBCUserDao implements UserDao {
                 "ALTER TABLE results ADD CONSTRAINT user_id_foreign FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;";
         String queryUser = "DELETE FROM users WHERE id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(queryResult)) {
-//            preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +240,6 @@ public class JDBCUserDao implements UserDao {
             e.printStackTrace();
         }
 
-//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return null;
     }
 

@@ -3,6 +3,7 @@ package me.project.controller.servlet;
 import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.controller.command.commands_admin.*;
+import me.project.model.service.ResultService;
 import me.project.model.service.UserService;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ public class AdminServlet extends HttpServlet {
 
     private final Map<String, Command> commands = new HashMap<>();
     private UserService userService;
+    private ResultService resultService;
     private DeleteUserCommand deleteUserCommand;
     private AddTestsToUserCommand addTestsToUserCommand;
     private DeleteTestCommand deleteTestCommand;
@@ -27,6 +29,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     public void init() {
         userService = new UserService();
+        resultService = new ResultService();
 
         commands.put("home", new HomeCommand());
         commands.put("tests/", new GetTestsCommand());
@@ -35,7 +38,7 @@ public class AdminServlet extends HttpServlet {
         commands.put("profile", new ProfileCommand());
 
         deleteUserCommand = new DeleteUserCommand();
-        addTestsToUserCommand = new AddTestsToUserCommand();
+        addTestsToUserCommand = new AddTestsToUserCommand(userService, resultService);
         deleteTestCommand = new DeleteTestCommand();
         createTestCommand = new CreateTestCommand();
 

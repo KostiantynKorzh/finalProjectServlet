@@ -20,11 +20,14 @@ public class ProfileCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");
+
         request.setAttribute("overallTests", testService.getTests().size());
         request.setAttribute("overallUsers", userService.getUsers().size());
+
         User userTemp = userService.getUserById(user.getId());
         UserInfoDTO userToInfo = new UserInfoDTO(userTemp.getFirstName(), userTemp.getLastName(), userTemp.getLogin());
         request.setAttribute("userToInfo", userToInfo);
+
         return View.ADMIN_PROFILE_PAGE;
     }
 }

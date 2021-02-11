@@ -101,7 +101,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -110,17 +109,21 @@
                 <form method="post" action="${pageContext.request.contextPath}/admin/users/edit">
                     <div class="form-group has-error">
                         <div class="mb-3">
-                            <label for="firstName" class="control-label">First Name:</label>
+                            <label for="firstName" class="control-label"><fmt:message
+                                    key="admin.allUsers.firstName"/></label>
                             <input type="text" class="form-control" id="firstName" name="firstName">
                         </div>
                         <div class="mb-3">
-                            <label for="lastName" class="col-form-label">Last Name:</label>
+                            <label for="lastName" class="col-form-label"><fmt:message
+                                    key="admin.allUsers.lastName"/></label>
                             <input type="text" class="form-control" id="lastName" name="lastName">
                         </div>
                         <input hidden type="text" name="id" id="hiddenId"/>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id="">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="saveEdit" data-id=""><fmt:message
+                                    key="admin.allTests.createModal.save"/></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message
+                                    key="admin.allTests.createModal.cancel"/></button>
                         </div>
                     </div>
                 </form>

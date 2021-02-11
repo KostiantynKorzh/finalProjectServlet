@@ -3,6 +3,7 @@ package me.project.controller.servlet;
 import me.project.controller.View;
 import me.project.controller.command.Command;
 import me.project.controller.command.commands_user.*;
+import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 import me.project.model.service.UserService;
 
@@ -24,19 +25,21 @@ public class UserServlet extends HttpServlet {
     private Command takeTestCommand;
 
     private UserService userService;
+    private ResultService resultService;
 
 
     @Override
     public void init() {
 
         userService = new UserService();
+        resultService = new ResultService();
 
         commands.put("home", new HomeCommand());
         commands.put("requiredTests/", new RequiredTestsCommand());
-        commands.put("passedTests/", new PassedTestsCommand());
-        commands.put("profile", new ProfileCommand(userService));
-        passTestCommand = new PassTestCommand();
-        takeTestCommand = new TakeTestCommand();
+        commands.put("passedTests/", new PassedTestsCommand(resultService));
+        commands.put("profile", new ProfileCommand(userService, resultService));
+        passTestCommand = new PassTestCommand(resultService);
+        takeTestCommand = new TakeTestCommand(resultService);
     }
 
     @Override

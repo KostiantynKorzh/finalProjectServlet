@@ -8,6 +8,7 @@ import me.project.controller.command.Command;
 import me.project.model.dto.CompleteTestDTO;
 import me.project.model.dto.TestDTO;
 import me.project.model.dto.UserDTO;
+import me.project.model.service.ResultService;
 import me.project.model.service.TestService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,25 +20,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TakeTestCommand implements Command {
-    private TestService testService = TestService.getInstance();
+    private final ResultService resultService;
+    private final TestService testService = TestService.getInstance();
     private final ObjectMapper jsonMapper = new ObjectMapper();
+
+    public TakeTestCommand(ResultService resultService) {
+        this.resultService = resultService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
         Long testId = Long.valueOf(request.getRequestURI().replaceAll(".*/take/", "")
                 .replaceAll("/complete", ""));
         if (request.getRequestURI().contains("/complete")) {
-
-            List<CompleteTestDTO> tests = new ArrayList<>();
+            List<CompleteTestDTO> tests;
             try {
                 tests = getCompletedTestedFromJSONRequest(request);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("user");
-            try {
-                testService.checkCompletedTestAndCreateResult(user.getId(), testId, tests);
+                HttpSession session = request.getSession();
+                UserDTO user = (UserDTO) session.getAttribute("user");
+                resultService.checkCompletedTestAndCreateResult(user.getId(), testId, tests);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -47,13 +48,18 @@ public class TakeTestCommand implements Command {
             request.setAttribute("test", test);
             Date date = new Date();
             HttpSession session = request.getSession();
-            if (session.getAttribute("test") == null ||
-                    !(((TestDTO) (session.getAttribute("test"))).getTest().getId().equals(test.getTest().getId()))) {
+            TestDTO testFromSession = ((TestDTO) (session.getAttribute("test")));
+            if (session.getAttribute("test") == null || !isSameTest(testFromSession, test)) {
                 session.setAttribute("test", test);
-                session.setAttribute("deadline", date.getTime() + test.getTest().getDuration()*1000);
+                session.setAttribute("deadline", date.getTime() + test.getTest().getDuration() * 1000);
             }
             return View.TAKE_TEST_PAGE_USER;
         }
+    }
+
+    // check if test in session is the same, otherwise we can update deadline in session
+    private boolean isSameTest(TestDTO testFromSession, TestDTO test) {
+        return testFromSession.getTest().getId().equals(test.getTest().getId());
     }
 
     private List<CompleteTestDTO> getCompletedTestedFromJSONRequest(HttpServletRequest request) throws IOException {

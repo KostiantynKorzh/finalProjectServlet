@@ -32,17 +32,17 @@ public class AuthFilter implements Filter {
 
         boolean loggedIn = session.getAttribute("user") != null;
 
-        boolean canGuest = req.getRequestURI().contains(loginURL)
+        boolean availableForGuest = req.getRequestURI().contains(loginURL)
                 || req.getRequestURI().contains(signupURL);
 
         boolean lang = req.getRequestURI().contains(langUrl);
 
-        if (!loggedIn && !canGuest && !lang) {
+        if (!loggedIn && !availableForGuest && !lang) {
             res.sendRedirect(loginURL);
             return;
         }
 
-        if (loggedIn && canGuest) {
+        if (loggedIn && availableForGuest) {
             session.setAttribute("user", null);
             res.sendRedirect(loginURL);
             return;

@@ -9,6 +9,7 @@ me/project/model/dao/AnswerDao.class
 me/project/model/entity/Test.class
 me/project/model/entity/User.class
 me/project/model/dao/factory/JDBCDaoFactory.class
+me/project/model/entity/Result$Builder.class
 me/project/controller/command/commands_user/PassedTestsCommand.class
 me/project/model/entity/Question$Builder.class
 me/project/model/entity/RequiredTest.class
@@ -27,6 +28,7 @@ me/project/controller/servlet/AuthServlet.class
 me/project/controller/command/commands_admin/GetUsersCommand.class
 me/project/model/dao/RequiredTestDao.class
 me/project/controller/listener/ContextListener.class
+me/project/model/entity/Result.class
 me/project/controller/command/commands_admin/DeleteTestCommand.class
 me/project/controller/command/commands_admin/HomeCommand.class
 me/project/model/dto/TestDTO.class
@@ -53,6 +55,7 @@ me/project/controller/filter/LangFilter.class
 me/project/controller/command/commands_admin/EditUserCommand.class
 me/project/controller/command/commands_admin/GetTestsCommand.class
 me/project/controller/command/commands_auth/LoginCommand.class
+me/project/controller/servlet/ErrorServlet.class
 me/project/model/dto/UserDTO$Builder.class
 me/project/model/entity/Answer.class
 me/project/model/entity/enums/Difficulty.class

@@ -37,7 +37,8 @@
         </ul>
     </c:forEach>
 
-    <input type="submit" class="btn btn-success m-5" value="Submit answers" onclick="submitAnswers()"/>
+    <input type="submit" class="btn btn-success m-5" value="<fmt:message key="user.takeTest.submit"/>"
+           onclick="submitAnswers()"/>
 
 </div>
 
@@ -46,6 +47,9 @@
 </div>
 
 <script type="text/javascript">
+
+    let submitted = false;
+
     function submitAnswers() {
         const formsCollection = document.getElementsByTagName("form");
         let answers = [];
@@ -82,26 +86,32 @@
             dataType: 'json',
             data: JSON.stringify(allQa)
         });
+
+        submitted = true;
+
         window.location.replace("http://localhost:8080/user/home");
     }
 
     let deadline = ${sessionScope.deadline};
-    let duration =${requestScope.test.test.duration}*1000;
+    let duration =
+    ${requestScope.test.test.duration}*
+    1000;
 
     window.addEventListener("beforeunload", function (e) {
-        submitAnswers();
+        if (!submitted) {
+            submitAnswers();
+        }
     });
 
-    $(function(){
-        setInterval(function(){
+    $(function () {
+        setInterval(function () {
             let percentage = (deadline - Date.now()) / duration * 100;
-            if(percentage<0){
+            if (percentage < 0) {
                 submitAnswers();
             }
             $(".progress-bar").css("width", percentage + "%");
         }, 1000);
     });
-
 
 
 </script>
